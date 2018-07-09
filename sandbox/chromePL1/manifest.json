@@ -1,14 +1,22 @@
 {
   "manifest_version": 2,
   "name": "plugin1",
+  "description": "ROYMusicHelper is a great extension which provides features of searching and downloading music from external resources",
   "version": "1.0",
   "permissions": [
     "<all_urls>"
   ],
-  "app": {
-    "launch": {
-      "local_path": "main.html"
-    }
+
+  "icons": { "48": "music-48.png" },
+  "browser_action": {
+    "default_icon": {                    // optional
+      "48": "music-48.png"           // optional
+    },
+    "default_title": "ROYMusicHelper",      // optional; shown in tooltip
+    "default_popup": "popup.html"        // optional
   },
-  "icons": { "48": "music-48.png" }
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  }
 }
