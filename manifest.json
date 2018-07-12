@@ -21,8 +21,9 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://www.shazam.com/ru/myshazam"],
-      "js": ["/src/injects/shazam.js", "/lib/jquery-3.3.1.min.js"]
+      "run_at": "document_end",
+      "matches": ["https://www.shazam.com/ru/myshazam*"],
+      "js": ["/lib/jquery-3.3.1.min.js", "/src/injects/shazam.js"]
     }
   ]
 }
