@@ -5,14 +5,18 @@
     function processTitle(title) {
         let downloadUrl;
         let downloadError;
+        console.log("SADManager#processTitle title - " + title);
         for (let source of supportedSources) {
-            downloadUrl = source.processTitle();
+            console.log("Current source - " + source.name);
+            downloadUrl = source.processTitle(title);
+            console.log("downloadUrl - " + downloadUrl);
             if (downloadUrl !== undefined) {
                 downloadError = downloadFile(downloadUrl);
-
                 if (downloadError === undefined) {
+                    console.log("downloaded!");
                     break;
                 }
+                console.log("downloading error!");
             }
         }
     }

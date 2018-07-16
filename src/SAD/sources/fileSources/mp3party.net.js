@@ -1,6 +1,7 @@
 {
     let mp3partyNetSource = {};
 
+    mp3partyNetSource.name = "mp3party.net";
     mp3partyNetSource.baseSearchUrl = "http://mp3party.net/search?q=";
     mp3partyNetSource.baseDownloadUrl = "http://dl1.mp3party.net/download/";
     mp3partyNetSource.requestMethod = "GET";
@@ -13,7 +14,7 @@
         xhr.open(mp3partyNetSource.requestMethod, url, true);
 
         xhr.onload = function() {
-            console.log("XHR onload start");
+            console.log("XHR onload mp3party.net start");
             let song = xhr.response.querySelector(".song-item a");
 
             if(song === undefined){
@@ -21,10 +22,14 @@
             }
 
             let href = song.getAttribute("href");
-            href = href.substring(href.lastIndexOf("/") + 1, href.length);
 
-            console.log("XHR onload end. SEARCH URL - " + mp3partyNetSource.baseSearchUrl + "  DOWNLOAD URL - " + mp3partyNetSource.baseDownloadUrl + href);
-            return mp3partyNetSource.baseDownloadUrl + href;
+            console.log("song page url - " + href);
+            href = href.substring(href.lastIndexOf("/") + 1, href.length);
+            console.log("song id will be used later - " + href);
+
+            let downloadUrl = mp3partyNetSource.baseDownloadUrl + href;
+            console.log("XHR onload end. SEARCH URL - " + url + " " + "  DOWNLOAD URL - " + downloadUrl);
+            return downloadUrl;
         };
 
         xhr.onerror = function() {
