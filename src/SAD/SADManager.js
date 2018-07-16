@@ -3,27 +3,33 @@
 
 
     function processTitle(title) {
-        let downloadUrl;
-        let downloadError;
-        console.log("SADManager#processTitle title - " + title);
-        for (let source of supportedSources) {
-            console.log("Current source - " + source.name);
-            downloadUrl = source.processTitle(title);
-            console.log("downloadUrl - " + downloadUrl);
-            if (downloadUrl !== undefined) {
-                downloadError = downloadFile(downloadUrl);
-                if (downloadError === undefined) {
-                    console.log("downloaded!");
-                    break;
-                }
-                console.log("downloading error!");
-            }
-        }
+        let cycle = new AsyncCycle(supportedSources, function (source) {
+                console.log("Current source - " + source.name);
+                source.processTitle(title, this);
+        });
+        console.log("SADMAnager#processTitle")
+        cycle.next()
+
     }
 
     function downloadFile(url) {
-        let downloadOpts = {url: url};
-        chrome.downloads.download(downloadOpts);
+        console.log("downloadUrl - " + url);
+        if (url !== undefined) {
+            let downloadError;
+
+            let downloadOpts = {url: url};
+            chrome.downloads.download(downloadOpts);
+
+
+            if (downloadError === undefined) {
+                console.log("downloaded!");
+                return true;
+            }
+            console.log("downloading error!");
+        }
+
+        return false;
+
     }
 
     function registerSource(object) {

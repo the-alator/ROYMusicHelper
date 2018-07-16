@@ -1,18 +1,18 @@
 {
-    let mp3partyNetSource = {};
+    let zaycevNetSource = {};
 
-    mp3partyNetSource.name = "zaycev.net";
-    // mp3partyNetSource.baseSearchUrl = "http://mp3party.net/search?q=";
-    mp3partyNetSource.baseSearchUrl = "http://zaycev.net/pages/43314/4331498.shtml";
-    mp3partyNetSource.baseDownloadUrl = "http://dl1.mp3party.net/download/";
-    mp3partyNetSource.requestMethod = "GET";
+    zaycevNetSource.name = "zaycev.net";
+    // zaycevNetSource.baseSearchUrl = "http://mp3party.net/search?q=";
+    zaycevNetSource.baseSearchUrl = "http://zaycev.net/pages/43314/4331498.shtml";
+    zaycevNetSource.baseDownloadUrl = "http://dl1.mp3party.net/download/";
+    zaycevNetSource.requestMethod = "GET";
 
-    mp3partyNetSource.processTitle = function(title){
+    zaycevNetSource.processTitle = function(title, cycle){
         console.log("In process title of zaycev.net");
         let xhr = new XMLHttpRequest();
-        let url = mp3partyNetSource.baseSearchUrl; // + title;
+        let url = zaycevNetSource.baseSearchUrl; // + title;
         xhr.responseType = "document";
-        xhr.open(mp3partyNetSource.requestMethod, url, true);
+        xhr.open(zaycevNetSource.requestMethod, url, true);
 
         xhr.onload = function() {
             console.log("XHR onload zaycev.net start");
@@ -28,9 +28,12 @@
             href = href.substring(href.lastIndexOf("/") + 1, href.length);
             console.log("song id will be used later - " + href);
 
-            let downloadUrl = mp3partyNetSource.baseDownloadUrl + href;
+            let downloadUrl = zaycevNetSource.baseDownloadUrl + href;
             console.log("XHR onload end. SEARCH URL - " + url + " " + "  DOWNLOAD URL - " + downloadUrl);
-            return downloadUrl;
+
+            if(!downloadFile(downloadUrl)){
+                cycle.next();
+            }
         };
 
         xhr.onerror = function() {
@@ -41,5 +44,5 @@
         xhr.send();
     };
 
-    registerSource(mp3partyNetSource);
+    registerSource(zaycevNetSource);
 }

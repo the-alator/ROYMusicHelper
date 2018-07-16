@@ -16,7 +16,12 @@
     "default_popup": "src/main/general/popup.html"
   },
   "background": {
-    "scripts": ["/lib/jquery-3.3.1.min.js", "/src/main/general/background.js", "/src/SAD/SADManager.js",  "/src/SAD/sources/fileSources/mp3party.net.js"],
+    "scripts": ["/lib/jquery-3.3.1.min.js",
+      "/src/main/general/background.js",
+      "/src/SAD/SADManager.js",
+      "/src/SAD/sources/fileSources/mp3party.net.js",
+      "/src/SAD/sources/fileSources/zaycev.net.js",
+      "/src/SAD/cycle.js"],
     "persistent": true
   },
   "content_scripts": [

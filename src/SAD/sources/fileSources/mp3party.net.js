@@ -6,7 +6,7 @@
     mp3partyNetSource.baseDownloadUrl = "http://dl1.mp3party.net/download/";
     mp3partyNetSource.requestMethod = "GET";
 
-    mp3partyNetSource.processTitle = function(title){
+    mp3partyNetSource.processTitle = function(title, cycle){
         console.log("In process title mp3party");
         let xhr = new XMLHttpRequest();
         let url = mp3partyNetSource.baseSearchUrl + title;
@@ -29,7 +29,10 @@
 
             let downloadUrl = mp3partyNetSource.baseDownloadUrl + href;
             console.log("XHR onload end. SEARCH URL - " + url + " " + "  DOWNLOAD URL - " + downloadUrl);
-            return downloadUrl;
+
+            if(!downloadFile(downloadUrl)){
+                cycle.next();
+            }
         };
 
         xhr.onerror = function() {

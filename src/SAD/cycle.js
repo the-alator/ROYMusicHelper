@@ -3,9 +3,11 @@ function AsyncCycle(list, cycleBody){
     this.currentIndex = 0;
     this.cycleBody = cycleBody;
     this.next = function(){
-        if(++currentIndex === list.length){
+        console.log("next is started. CI - " + this.currentIndex + " list.length - " + this.list.length);
+        if(this.currentIndex === this.list.length){
             return;
         }
-        this.cycleBody(this.list[this.currentIndex]);
+        console.log("next is performing");
+        this.cycleBody(this.list[this.currentIndex++]);
     }
 }
