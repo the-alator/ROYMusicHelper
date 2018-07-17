@@ -2,34 +2,57 @@
     let zaycevNetSource = {};
 
     zaycevNetSource.name = "zaycev.net";
-    // zaycevNetSource.baseSearchUrl = "http://mp3party.net/search?q=";
-    zaycevNetSource.baseSearchUrl = "http://zaycev.net/pages/43314/4331498.shtml";
-    zaycevNetSource.baseDownloadUrl = "http://dl1.mp3party.net/download/";
+    zaycevNetSource.baseSearchUrl = "http://zaycev.net/search.html?query_search=";
+    zaycevNetSource.baseSongPageUrl = "http://zaycev.net";
     zaycevNetSource.requestMethod = "GET";
 
     zaycevNetSource.processTitle = function(title, cycle){
-        console.log("In process title of zaycev.net");
+        console.log("In process title zaycevNet");
+        this.processSearchPage(title, cycle);
+    };
+    zaycevNetSource.processSearchPage = function(title, cycle){
         let xhr = new XMLHttpRequest();
-        let url = zaycevNetSource.baseSearchUrl; // + title;
+        let url = zaycevNetSource.baseSearchUrl + title;
         xhr.responseType = "document";
         xhr.open(zaycevNetSource.requestMethod, url, true);
 
         xhr.onload = function() {
-            console.log("XHR onload zaycev.net start");
-            let song = xhr.response.querySelector(".song-item a");
+            console.log("XHR onload zaycev.net searchPage start");
+            let song = xhr.response.querySelector(".musicset-track__title track-geo__title .musicset-track__track-name a");
 
             if(song === undefined){
-                return undefined;
+                return;
             }
 
-            let href = song.getAttribute("href");
+            let songPageUrl = zaycevNetSource.baseSongPageUrl + song.getAttribute("href");
+            console.log("song page url - " + songPageUrl);
 
-            console.log("song page url - " + href);
-            href = href.substring(href.lastIndexOf("/") + 1, href.length);
-            console.log("song id will be used later - " + href);
+            zaycevNetSource.processSongPage(songPageUrl, cycle);
+        };
 
-            let downloadUrl = zaycevNetSource.baseDownloadUrl + href;
-            console.log("XHR onload end. SEARCH URL - " + url + " " + "  DOWNLOAD URL - " + downloadUrl);
+        xhr.onerror = function() {
+            console.log("[ERROR] - XHR searchPage");
+            cycle.next();
+        };
+
+        xhr.send();
+    };
+
+    zaycevNetSource.processSongPage = function(url, cycle){
+        let xhr = new XMLHttpRequest();
+        xhr.responseType = "document";
+        xhr.open(zaycevNetSource.requestMethod, url, true);
+
+        xhr.onload = function() {
+            console.log("XHR onload zaycev.net songPage start");
+            let songDownload = xhr.response.querySelector("a.button-download__link");
+
+            if(songDownload == undefined){
+                return;
+            }
+
+            let downloadUrl = songDownload.getAttribute("href");
+            console.log("song download url - " + downloadUrl);
 
             if(!downloadFile(downloadUrl)){
                 cycle.next();
@@ -37,8 +60,8 @@
         };
 
         xhr.onerror = function() {
-            // Error code goes here.
-            alert(200);
+            console.log("[ERROR] - XHR songPage");
+            cycle.next();
         };
 
         xhr.send();
@@ -46,3 +69,4 @@
 
     registerSource(zaycevNetSource);
 }
+
