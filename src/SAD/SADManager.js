@@ -7,7 +7,7 @@
                 console.log("Current source - " + source.name);
                 source.processTitle(title, this);
         });
-        console.log("SADMAnager#processTitle")
+        console.log("SADMAnager#processTitle " + title);
         cycle.next()
 
     }

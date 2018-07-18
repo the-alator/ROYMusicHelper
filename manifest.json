@@ -21,6 +21,7 @@
       "/src/SAD/SADManager.js",
       "/src/SAD/sources/fileSources/mp3party.net.js",
       "/src/SAD/sources/fileSources/zaycev.net.js",
+      "/src/SAD/sources/fileSources/godfaithculture.com.js",
       "/src/SAD/cycle.js"],
     "persistent": true
   },
