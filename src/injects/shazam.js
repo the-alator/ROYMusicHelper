@@ -12,7 +12,7 @@ $(document).ready(function () {
 
 function setButtons(){
     logme("buttons set");
-    $("article.shz-partial-track div.details").after("<button data-shz-beacon=\"type=btn,providerdesc=overflow-click\" class=\"ROYMusicHelperDownloadButton popup-btn\"><img alt='download' src='" + chrome.runtime.getURL("resources/images/general/download.jpg") + "'></button>");
+    $("article.shz-partial-track div.details").after("<button data-shz-beacon=\"type=btn,providerdesc=overflow-click\" class=\"ROYMusicHelperDownloadButton popup-btn\"><img alt='download' src='" + chrome.runtime.getURL("resources/images/general/download.png") + "'></button>");
     $(".ROYMusicHelperDownloadButton").click(function (event) {
         event.stopImmediatePropagation();
     });

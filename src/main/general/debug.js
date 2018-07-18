@@ -10,3 +10,6 @@ SAD.addEventListener("click", function (e) {
     console.log("attempt to SAD " + SADInput.value);
     chrome.runtime.sendMessage({action: "processTitle", value: SADInput.value});
 });
+
+let button = document.getElementById("dwnldbtn");
+button.setAttribute("src", chrome.runtime.getURL("resources/images/general/download.png"));
