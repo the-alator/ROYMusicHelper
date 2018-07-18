@@ -18,9 +18,11 @@
 
         xhr.onload = function() {
             console.log("XHR onload zaycev.net searchPage start");
-            let song = xhr.response.querySelector(".musicset-track__title track-geo__title .musicset-track__track-name a");
+            let song = xhr.response.querySelector(".musicset-track__title.track-geo__title .musicset-track__track-name a");
 
-            if(song === undefined){
+            if(song == undefined){
+                console.log("song - " + song);
+                cycle.next();
                 return;
             }
 
@@ -48,6 +50,7 @@
             let songDownload = xhr.response.querySelector("a.button-download__link");
 
             if(songDownload == undefined){
+                cycle.next();
                 return;
             }
 

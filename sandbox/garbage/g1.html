@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+    <script type="text/javascript">window._starttime = Date.now();</script>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="viewport-fit=cover,width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="google-site-verification" content="nGAcqx7roWuHRJqnmLtrdGHpwj5pIcjech0Kx-Yeuog">
+    <meta property="fb:app_id" content="210827375150">
+    <meta property="og:site_name" content="Shazam">
+    <meta property="og:type" content="website">
+    <title>Shazam</title>
+    <link rel="dns-prefetch" href="https://images.shazam.com">
+    <link rel="help" href="https://support.shazam.com">
+    <link rel="shortcut icon" href="/resources/15e161ab8350dfddaf6c39528334659073751627/favicon.ico">
+    <style>html, body {
+        min-width: 100%;
+        min-height: 100%;
+        height: 100%;
+        background-size: 100%;
+        background-color: black;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    body {
+        overflow: hidden;
+    }
+
+    .svg-icons {
+        display: none;
+    }</style>
+    <link type="text/css" rel="stylesheet" href="/builds/20180713-8f286ca-152056/website/main.css">
+    <script type="text/javascript">window.beaconError = function (e) {
+        var r, o = "https://beacon.shazam.com/shazam/-/-/-/-/-/beacon/-/error?";
+        if (e) for (r in e) o += r + "=" + e[r] + "&";
+        (new Image).src = o
+    }, window.onerror = function (e, r, o, n) {
+        var t, a, c = [], s = "20180713-8f286ca-152056";
+        if ("string" == (typeof e).toLowerCase()) c.push(e), a = encodeURIComponent(e); else for (t in e) c.push(t + ":" + e[t]);
+        r && "string" == (typeof r).toLowerCase() && (r = r.replace(/^https:\/\/www.shazam.com\//, ""), r = r.replace(/^builds\/20180713-8f286ca-152056\//, ""), a += "_url_" + r.substr(r.indexOf("?") + 1, 30)), o && (a += "_line_" + o), n && (a += "_col_" + n);
+        try {
+            a = a.replace(/(%20|%3A|\s)/g, "_"), a.search(/Uncaught_SyntaxError__Unexpected_identifier/gi) > -1 ? a = "USEi_" + r.substr(r.indexOf("?") + 1, 80) : a.search(/Uncaught_SyntaxError__Unexpected_token/gi) > -1 ? a = "USEt_" + r.substr(r.indexOf("?") + 1, 80) : a.search(/Uncaught_SyntaxError__Block/gi) > -1 && (a = "USEb_" + r.substr(r.indexOf("?") + 1, 80)), "Script_error." != a && shz.stats.stat({
+                beaconType: "error",
+                providerdesc: "web_err_global",
+                errordesc: a || "",
+                path: "undefined" != typeof document && document.location && document.location.pathname,
+                buildnum: s
+            });
+            try {
+                shz.app && shz.app.set("globalerror", {msg: e, url: r, line: o, col: n})
+            } catch (e) {
+            }
+        } catch (e) {
+            "Script_error." != a && beaconError({
+                beaconType: "error",
+                providerdesc: "web_err_global",
+                errordesc: a || "",
+                path: "undefined" != typeof document && document.location && document.location.pathname,
+                buildnum: s
+            })
+        }
+    };</script>
+    <script type="text/javascript">window.shzGAToken = "UA-5140854-14";
+    var _prum = [["id", "57a859e2abe53d4c565d3f4e"], ["mark", "firstbyte", (new Date).getTime()]];
+    !function () {
+        var e = document.getElementsByTagName("script")[0], t = document.createElement("script");
+        t.async = "async", t.src = "//rum-static.pingdom.net/prum.min.js", e.parentNode.insertBefore(t, e)
+    }();</script>
+</head>
+<body>
+<div class="underlay" data-shz-beacon="section=underlay"></div>
+<div class="svg-icons"></div>
+<div class="root">
+    <header class="header" data-shz-beacon="section=header"></header>
+    <div class="content grid grid-full-bleed">
+        <aside class="left flex-reset" data-shz-beacon="section=left"></aside>
+        <main class="main" data-shz-beacon="section=main"></main>
+        <aside class="right flex-reset" data-shz-beacon="section=right"></aside>
+    </div>
+    <footer class="footer" data-shz-beacon="section=footer"></footer>
+</div>
+<footer class="footerstatic" data-shz-beacon="section=footerstatic"></footer>
+<div class="overlay grid grid-horiz-center grid-vert-center" data-shz-beacon="section=overlay"></div>
+<div class="scroller"></div>
+</body>
+<script type="text/javascript">function updateWindow() {
+    window.shz && window.shz.config && window.shz.config.bodyStyles && window.shz.config.bodyStyles.some(function (e) {
+        if (document.location.href.match(e.path)) return e.cssText && (document.body.style.cssText = e.cssText), (e.bodyClass || []).forEach(function (e) {
+            document.body.classList.add(e)
+        }), !0
+    })
+}
+
+window.shz = {
+    version: "20180713-8f286ca-152056",
+    appname: "website",
+    config: {
+        stats: [{
+            path: "partner/sc/",
+            beaconUrl: "https://beacon.shazam.com/beacons/api/v1/beacon/{appname}/{appver}/{lang}/{country}/{platform}/{devicemodel}/beacon/{inid}/",
+            keys: ["providerdesc"],
+            pathParams: {appname: "shazamsc", appver: "1.0"},
+            timespent: !0,
+            hashParamsToInclude: ["origin"],
+            preload: {beaconType: "scpreload", screenname: "sc"},
+            removeParams: ["ec", "fc", "inapp", "referrer", "bot"],
+            disableGA: !0
+        }, {
+            path: "abtest/track/wutang/",
+            beaconUrl: "https://beacon.shazam.com/beacons/api/v1/beacon/{appname}/{appver}/{lang}/{country}/{platform}/{devicemodel}/beacon/{inid}/",
+            keys: ["providerdesc"],
+            staticKeys: {screenname: "details"},
+            pathParams: {appname: "shazamtracktest", appver: "1.0"},
+            disableGA: !0
+        }, {
+            path: "abtest/track/tabs/",
+            timespent: !0,
+            beaconUrl: "https://beacon.shazam.com/beacons/api/v1/beacon/{appname}/{appver}/{lang}/{country}/{platform}/{devicemodel}/beacon/{inid}/",
+            pathParams: {appname: "shazamtracktest", appver: "2.0"},
+            disableGA: !0
+        }, {
+            path: "partner/seat/track/",
+            timespent: !0,
+            beaconUrl: "https://beacon.shazam.com/beacons/api/v1/beacon/{appname}/{appver}/{lang}/{country}/{platform}/{devicemodel}/beacon/{inid}/",
+            pathParams: {appname: "shazamseat", appver: "2.0"},
+            disableGA: !0
+        }, {
+            path: "partner/viber/track/",
+            timespent: !0,
+            beaconUrl: "https://beacon.shazam.com/beacons/api/v1/beacon/{appname}/{appver}/{lang}/{country}/{platform}/{devicemodel}/beacon/{inid}/",
+            pathParams: {appname: "viber", appver: "2.0"},
+            disableGA: !0
+        }, {
+            path: "campaign/",
+            timespent: !0,
+            beaconUrl: "https://beacon.shazam.com/beacons/api/v1/beacon/{appname}/{appver}/{lang}/{country}/{platform}/{devicemodel}/beacon/{inid}/",
+            pathParams: {appname: "web", appver: "2.0"},
+            disableGA: !0
+        }],
+        linkReplacements: [{
+            path: "partner/sc/",
+            urlMatch: "itunes.apple.com",
+            pathReplacementParams: {at: "1000lIx8", ct: "ShazamSC_{store}"}
+        }, {
+            path: "partner/viber/",
+            urlMatch: "itunes.apple.com",
+            pathReplacementParams: {at: "1000lIx8", ct: "ShazamV_{store}"}
+        }, {path: "abtest/", urlMatch: "__no_match_url__", pathReplacementParams: {}}, {
+            path: "campaign/",
+            urlMatch: "itunes.apple.com"
+        }, {path: "", urlMatch: "itunes.apple.com", pathReplacementParams: {at: "1000lIx8", ct: "ShazamWeb_{store}"}}],
+        bodyStyles: [{
+            path: "partner/fb/",
+            cssText: "background-color:black",
+            bodyClass: ["shz-snapchat"]
+        }, {
+            path: "partner/sc/",
+            cssText: "background-color:black",
+            bodyClass: ["shz-snapchat"]
+        }, {path: "partner/seat/track/", cssText: "background-color:#000;"}, {
+            path: "abtest/track/wutang/",
+            cssText: "background-color:black",
+            bodyClass: ["has-scroller"]
+        }, {path: "abtest/track/tabs/", cssText: "background-color:black"}, {
+            path: "abtest/track/tabs/lyrics/full",
+            cssText: "background-color:black"
+        }, {path: "abtest/track/lyricshare", cssText: "background-color:black"}, {
+            path: "inapp=true",
+            bodyClass: ["inapp"]
+        }, {path: "campaign/editor/", cssText: "background-color:white"}, {
+            path: "campaign/",
+            cssText: "background-color:black"
+        }, {path: "/", cssText: "background-color:white"}, {
+            path: "abtest/sharethemoment/home/",
+            cssText: "background-color:black",
+            bodyClass: ["has-scroller"]
+        }, {path: "abtest/trendsetter/", cssText: "background-color:black", bodyClass: ["has-scroller"]}],
+        sectionSets: {
+            icons: {"svg-icons": {path: "/ux/svg"}},
+            website: {
+                header: {path: "/header"},
+                footer: {path: "/footer"},
+                footerstatic: {path: "/ux/playerbar"},
+                "svg-icons": {path: "/ux/svg"}
+            }
+        },
+        ampproject: {
+            sections: {
+                header: {path: "/header"},
+                footer: {path: "/footer"},
+                "app-banner": {path: "/apps/banner"},
+                "page-view": {path: "/pageview"}
+            }
+        },
+        ads: {
+            google: {
+                Charts_300x250: {siteid: "/6925/Shazam_Website/Charts_300x250", width: 300, height: 250},
+                Charts_320x50: {siteid: "/6925/Shazam_Website/Charts_320x50", width: 320, height: 50},
+                Charts_728x90: {siteid: "/6925/Shazam_Website/Charts", width: 728, height: 90},
+                Track_300x250: {siteid: "/6925/Shazam_Website/Tracks_Desktop_300x250", width: 300, height: 250},
+                Track_320x50: {siteid: "/6925/Shazam_Website/Tracks_Mobile_320x50", width: 320, height: 50},
+                Track_abtest_320x50: {siteid: "/6925/Shazam_Website/Tracks_320x50_In_app_test", width: 320, height: 50},
+                Artist_300x250: {siteid: "/6925/Shazam_Website/ArtistsDesktop_300x250", width: 300, height: 250},
+                Artist_320x50: {siteid: "/6925/Shazam_Website/Artists_320x50", width: 320, height: 50},
+                Lyrics_300x250: {siteid: "/6925/Shazam_Website/Lyrics", width: 300, height: 250},
+                Homepage_300x250: {siteid: "/6925/Shazam_Website/Desktop_Home_Screen_300x250", width: 300, height: 250},
+                Homepage_320x50: {siteid: "/6925/Shazam_Website/Mobile_Home_Screen_320x50", width: 320, height: 50}
+            }
+        },
+        services: {
+            ampsc: {
+                track: {
+                    url: "/discovery/v4/{localeLanguage}/{country}/snapchat/-/track/{trackId}",
+                    noartimage: "/resources/15e161ab8350dfddaf6c39528334659073751627/nocoverart.jpg"
+                }
+            },
+            amptracktest: {
+                track: {
+                    url: "/discovery/v5/{localeLanguage}/{country}/{ampPlatform}/-/track/{trackId}",
+                    noartimage: "/resources/15e161ab8350dfddaf6c39528334659073751627/nocoverart.jpg"
+                }
+            },
+            amptentpole: {
+                track: {
+                    url: "/discovery/v5/{localeLanguage}/{country}/{ampPlatform}/-/track/{trackId}",
+                    noartimage: "/resources/15e161ab8350dfddaf6c39528334659073751627/nocoverart.jpg"
+                }
+            },
+            ampseat: {
+                track: {
+                    url: "/discovery/v5/{localeLanguage}/{country}/{ampPlatform}/-/track/{trackId}",
+                    noartimage: "/resources/15e161ab8350dfddaf6c39528334659073751627/nocoverart.jpg"
+                }
+            },
+            ampviber: {
+                track: {
+                    url: "/discovery/v5/{localeLanguage}/{country}/{ampPlatform}/-/track/{trackId}",
+                    noartimage: "/resources/15e161ab8350dfddaf6c39528334659073751627/nocoverart.jpg"
+                }
+            },
+            amplyrics: {track: {url: "/discovery/v4/{localeLanguage}/{country}/web/-/track/{trackId}"}},
+            ampbixby: {
+                track: {
+                    url: "/discovery/v4/{localeLanguage}/{country}/bixby/-/track/{trackId}",
+                    noartimage: "/resources/15e161ab8350dfddaf6c39528334659073751627/nocoverart.jpg"
+                }
+            },
+            amp: {
+                timeout: 15e3,
+                artist: {
+                    url: "/discovery/v2/{localeLanguage}/{country}/web/-/artist/{artistId}",
+                    noartimage: "/resources/15e161ab8350dfddaf6c39528334659073751627/no-artist-image.jpg"
+                },
+                charts: {url: "/shazam/v2/{localeLanguage}/{country}/web/-/tracks/web_chart_{type}_{countrycode}"},
+                feed: {
+                    url: "/shazam/v3/{localeLanguage}/{country}/web/-/feed/{inid}/:limit",
+                    artistpost: {types: ["artistpost", "artistpostv2"], limit: 10}
+                },
+                follow: {
+                    followurl: "/shazam/v1/{localeLanguage}/{country}/web/-/installation/{inid}/following/publisher/{followkey}",
+                    followerscounturl: "/shazam/v1/{localeLanguage}/{country}/web/-/publisher/{followkey}/followers/count",
+                    followinglisturl: "/shazam/v1/{localeLanguage}/{country}/web/-/installation/{inid}/following/:limit",
+                    followingcounturl: "/shazam/v1/{localeLanguage}/{country}/web/-/installation/{inid}/following/count"
+                },
+                halloffame: {key: "web_chart_hall_of_fame"},
+                like: {
+                    url: "/shazam/v1/{localeLanguage}/{country}/web/-/installation/{inid}/like/:likeKey",
+                    bulkurl: "/shazam/v1/{localeLanguage}/{country}/web/-/installation/{inid}/likes"
+                },
+                lister: {url: "/shazam/v2/{localeLanguage}/{country}/:platform/-/tracks/:chartKey"},
+                tagcounttrack: {url: "/shazam/v1/{localeLanguage}/{country}/web/-/tagcounts/track/{trackId}"},
+                tagcounttracklist: {url: "/shazam/v1/{localeLanguage}/{country}/web/-/tagcounts/tracklist"},
+                realtimetagcount: {url: "/shazam/v1/{localeLanguage}/{country}/web/-/tagcounts/tracklist"},
+                search: {
+                    url: "/discovery/v2/{localeLanguage}/{country}/web/-/search?searchQuery={query}&pageSize={pageSize}&startFrom={page}&ios84:true",
+                    track: {url: "/discovery/v2/{localeLanguage}/{country}/web/-/search/track?searchQuery={query}&pageSize={pageSize}&startFrom={page}&ios84:true"}
+                },
+                social: {},
+                tags: {
+                    list: {
+                        v1: {url: "/shazam/v1/{localeLanguage}/{country}/web/-/tags/:targetId:params"},
+                        v2: {url: "/discovery/v4/{localeLanguage}/{country}/web/-/tag/{inid}:queryString"}
+                    },
+                    add: {url: "/shazam/v1/{localeLanguage}/{country}/web/-/installation/{inid}/tags"},
+                    count: {url: "/shazam/v1/{localeLanguage}/{country}/web/-/installation/{inid}/tags/count"},
+                    delete: {
+                        v1: {url: "/shazam/v1/{localeLanguage}/{country}/web/-/tag/{inid}/:tagid"},
+                        v2: {url: "/shazam/v3/{localeLanguage}/{country}/web/-/installation/{inid}/tag/:tagtype/:tagid"}
+                    }
+                },
+                track: {
+                    url: "/discovery/v4/{localeLanguage}/{country}/web/-/track/{trackId}",
+                    noartimage: "/resources/15e161ab8350dfddaf6c39528334659073751627/nocoverart.jpg"
+                },
+                user: {
+                    preferences: {url: "/shazam/v1/{localeLanguage}/{country}/web/-/installation/{inid}/preferences"},
+                    account: {url: "/shazam/v1/{localeLanguage}/{country}/web/-/installation/{inid}/account"},
+                    login: {
+                        email: {url: "/auth/v1/registerWebEmail"},
+                        emailvalidation: {url: "/auth/v1/validateEmailWeb"},
+                        fb: {url: "/auth/v1/registerWebFb"}
+                    }
+                },
+                video: {search: {url: "/discovery/v2/-/{country}/-/track/-/videos?q::query"}}
+            },
+            amazon: {
+                album: "http://:amazonStore/gp/dmusic/aws/lookupAlbum.html?clientid=Shazam&ASIN=:amazonAsin",
+                track: "http://:amazonStore/gp/dmusic/aws/lookupTracks.html?clientid=Shazam&ASIN=:amazonAsin",
+                view: "http://:amazonStore/dp/:amazonAsin/?tag=:amazonTag",
+                preview: "http://:amazonStore/gp/dmusic/aws/sampleTrack.html?clientid=Shazam&ASIN=:amazonAsin"
+            },
+            itunes: {info: "http://itunes.apple.com/{country}/lookup?id=:iTunesId", clientid: "&at=11l3eE&ct=web"},
+            vevo: {url: "https://bnc.lt/WmIe/bmlhmC1kGv"},
+            beatshz: {
+                url: "/rec/partner/beatshz/{language}/{country}/beatshz/sync/recognise/02af3f8a-83c2-45f1-92dc-c5e1e74d310f/F92AEE17-9FFB-4B43-9093-9EAC1705C04B",
+                samplems: 5e3,
+                tolerance: 3e3
+            }
+        },
+        login: {
+            emailauthentication: {helpurl: "https://support.shazam.com/hc/en-us/articles/205382857-Email-Authentication"},
+            myshazam: {},
+            "privacy/download": {reauth: !0, redirect: "/privacy/submit/download"},
+            "privacy/download/view": {reauth: !0, redirect: "/privacy/download/view"},
+            "privacy/delete": {reauth: !0, redirect: "/privacy/submit/delete"},
+            "privacy/delete/apple": {reauth: !0, redirect: "/privacy/submit/delete", origin: "APPLE_OPT_OUT"}
+        },
+        MOBILE_THRESHOLD: 650,
+        lang_default: "en",
+        country_default: "GB",
+        videos: {launch_external: !1},
+        frames: {
+            "/home": {sectionSet: "website"},
+            "/myshazam": {sectionSet: "website"},
+            "/track": {
+                sectionSet: "website",
+                framelayout: {
+                    default: {
+                        mobileframes: ["/money/Track_320x50/id_{{id}}", "/track/lyrics/{{id}}", "/track/videos/{{id}}", "/track/toptracks/{{id}}", "/money/Track_300x250/mobile/id_{{id}}", "/track/recommended/{{id}}", "/ux/fbcomment/#path=track%2F{{id}};count=5", "/charts/promo"],
+                        desktopframes: {
+                            main: ["/track/videos/{{id}}", "/track/toptracks/{{id}}", "/track/recommended/{{id}}", "/ux/fbcomment/#path=track%2F{{id}};count=5"],
+                            side: ["/track/lyrics/{{id}}", "/money/Track_300x250/desktop/id_{{id}}", "/charts/promo"]
+                        }
+                    }
+                }
+            },
+            "/track/lyrics": {statFirstShow: !0},
+            "/artist": {
+                sectionSet: "website",
+                framelayout: {
+                    default: {
+                        mobileframes: ["/money/Artist_320x50/id_{{id}}", "/artist/posts/{{id}}", "/artist/toptracks/{{id}}", "/artist/videos/{{id}}", "/money/Artist_300x250/mobile/id_{{id}}", "/artist/biography/{{id}}", "/ux/fbcomment/#path=artist%2F{{id}};count=5", "/charts/promo"],
+                        desktopframes: {
+                            main: ["/artist/toptracks/{{id}}", "/artist/videos/{{id}}", "/ux/fbcomment/#path=artist%2F{{id}};count=5"],
+                            side: ["/money/Artist_300x250/desktop/id_{{id}}", "/artist/posts/{{id}}", "/artist/biography/{{id}}", "/charts/promo"]
+                        }
+                    }
+                }
+            },
+            "/artists": {
+                sectionSet: "website",
+                sections: {header: {path: "/artists/header"}},
+                verify: {sections: {header: {path: null}, footer: {path: null}}}
+            },
+            "/charts": {
+                sectionSet: "website",
+                available: [{
+                    type: "featured",
+                    options: [{
+                        type: "top-100",
+                        order: 1,
+                        img: "/resources/15e161ab8350dfddaf6c39528334659073751627/charts/top100/{format}/{country}.jpg",
+                        css: "shz-scheme-lightblue-blue"
+                    }, {
+                        type: "future-hits",
+                        order: 5,
+                        img: "/resources/15e161ab8350dfddaf6c39528334659073751627/charts/featured/world.png",
+                        css: "shz-scheme-future"
+                    }, {
+                        type: "hall-of-fame",
+                        iso: "",
+                        order: 3,
+                        img: "/resources/15e161ab8350dfddaf6c39528334659073751627/charts/featured/hof.jpg",
+                        css: "shz-scheme-hof"
+                    }]
+                }, {
+                    type: "genre",
+                    subtype: "top-20",
+                    count: 20,
+                    options: [{
+                        type: "hip-hop",
+                        iso: "GLOBAL",
+                        img: "/resources/15e161ab8350dfddaf6c39528334659073751627/charts/genres/{format}/hiphop.jpg",
+                        css: "shz-scheme-lightblue"
+                    }, {
+                        type: "dance",
+                        iso: "GLOBAL",
+                        img: "/resources/15e161ab8350dfddaf6c39528334659073751627/charts/genres/{format}/dance.jpg",
+                        css: "shz-scheme-maroon"
+                    }, {
+                        type: "pop",
+                        iso: "GLOBAL",
+                        img: "/resources/15e161ab8350dfddaf6c39528334659073751627/charts/genres/{format}/pop.jpg",
+                        css: "shz-scheme-blue"
+                    }, {
+                        type: "country",
+                        iso: "GLOBAL",
+                        img: "/resources/15e161ab8350dfddaf6c39528334659073751627/charts/genres/{format}/country.jpg",
+                        css: "shz-scheme-orange"
+                    }, {
+                        type: "latin",
+                        iso: "US",
+                        img: "/resources/15e161ab8350dfddaf6c39528334659073751627/charts/genres/{format}/latin.jpg",
+                        css: "shz-scheme-yellow"
+                    }]
+                }, {
+                    type: "future-hits",
+                    count: 20,
+                    options: [{iso: "AU"}, {iso: "FR"}, {iso: "DE"}, {iso: "IT"}, {iso: "ES"}, {iso: "GB"}, {iso: "US"}]
+                }, {
+                    type: "top-100",
+                    count: 100,
+                    options: [{iso: "WORLD"}, {iso: "US"}, {iso: "GB"}, {iso: "IT"}, {iso: "FR"}, {iso: "DE"}, {iso: "RU"}, {iso: "ES"}, {iso: "CA"}, {iso: "MX"}, {iso: "BR"}, {iso: "AU"}, {iso: "KR"}, {iso: "JP"}, {iso: "PL"}, {iso: "TR"}, {iso: "NL"}, {iso: "CH"}, {iso: "BE"}, {iso: "CL"}, {iso: "ZA"}, {iso: "AT"}, {iso: "CN"}, {iso: "DK"}, {iso: "SE"}, {iso: "NO"}, {iso: "PT"}, {iso: "GR"}, {iso: "IL"}, {iso: "UA"}, {iso: "HU"}, {iso: "RO"}, {iso: "IN"}, {iso: "IE"}, {iso: "AR"}, {iso: "CR"}, {iso: "CO"}, {iso: "UY"}, {iso: "VE"}, {iso: "BG"}, {iso: "CZ"}, {iso: "EC"}, {iso: "FI"}, {iso: "ID"}, {iso: "KZ"}, {iso: "MY"}, {iso: "NZ"}, {iso: "PE"}, {iso: "SA"}, {iso: "SG"}, {iso: "TH"}, {iso: "TW"}, {iso: "HR"}]
+                }],
+                promo: [{
+                    type: "top-100",
+                    iso: "WORLD",
+                    img: "/resources/15e161ab8350dfddaf6c39528334659073751627/charts/top100/sq/{country}.jpg",
+                    css: "shz-scheme-lightblue-blue"
+                }, {type: "future-hits"}, {
+                    type: "hip-hop",
+                    iso: "GLOBAL",
+                    subtype: "top-20",
+                    img: "/resources/15e161ab8350dfddaf6c39528334659073751627/charts/genres/{format}/hiphop.jpg",
+                    css: "shz-scheme-lightblue"
+                }, {
+                    type: "pop",
+                    iso: "GLOBAL",
+                    subtype: "top-20",
+                    img: "/resources/15e161ab8350dfddaf6c39528334659073751627/charts/genres/{format}/pop.jpg",
+                    css: "shz-scheme-blue"
+                }, {
+                    type: "dance",
+                    iso: "GLOBAL",
+                    subtype: "top-20",
+                    img: "/resources/15e161ab8350dfddaf6c39528334659073751627/charts/genres/{format}/dance.jpg",
+                    css: "shz-scheme-maroon"
+                }, {
+                    type: "country",
+                    iso: "GLOBAL",
+                    subtype: "top-20",
+                    img: "/resources/15e161ab8350dfddaf6c39528334659073751627/charts/genres/{format}/country.jpg",
+                    css: "shz-scheme-orange"
+                }, {
+                    type: "latin",
+                    iso: "US",
+                    subtype: "top-20",
+                    img: "/resources/15e161ab8350dfddaf6c39528334659073751627/charts/genres/{format}/latin.jpg",
+                    css: "shz-scheme-yellow"
+                }, {
+                    type: "hall-of-fame",
+                    iso: "",
+                    img: "/resources/15e161ab8350dfddaf6c39528334659073751627/charts/featured/hof.jpg",
+                    css: "shz-scheme-hof"
+                }]
+            },
+            "/apps/download": {sectionSet: "website"},
+            "/apps": {
+                sectionSet: "website",
+                data: {
+                    appstores: [{
+                        id: "apple",
+                        url: "https://itunes.apple.com/app/shazam/id284993459?mt=8&at=11l3eE&ct=5348615A-616D-3235-3830-44754D6D5973",
+                        btnclass: "apple-app-store",
+                        alt: "Download Shazam for iOS on the App Store",
+                        providerdesc: "iTunes-app-store-click"
+                    }, {
+                        id: "google",
+                        url: "https://play.google.com/store/apps/details?id=com.shazam.android",
+                        btnclass: "google",
+                        alt: "Download Shazam on Android",
+                        providerdesc: "Google-play-app-store-click"
+                    }],
+                    lite: {
+                        url: "https://play.google.com/store/apps/details?id=com.shazam.android.lite",
+                        btnclass: "google",
+                        alt: "Download Shazam on Android",
+                        providerdesc: "Google-play-app-store-click"
+                    },
+                    macapp: {
+                        url: "https://itunes.apple.com/us/app/shazam/id897118787?l=fr&ls=1&mt=12&at=11l3eE&ct=5348615A-616D-3235-3830-44754D6D5973",
+                        img: "/resources/15e161ab8350dfddaf6c39528334659073751627/apps/appstore_apple_mac.png",
+                        alt: "Download Shazam for Mac on the App Store",
+                        providerdesc: "Mac-app-store-click"
+                    }
+                }
+            },
+            "/abtest/track/tabs": {sectionSet: "icons"},
+            "/abtest/track/wutang": {sections: {footerstatic: {path: "/money/Track_abtest_320x50"}}},
+            "/abtest/track/wutang/preview": {previewSpotify: !0},
+            "/abtest/track/wutang/video": {autoplay: !1, statFirstShow: !0},
+            "/abtest/track/wutang/toptracks": {statFirstShow: !0},
+            "/abtest/track/wutang/lyrics": {statFirstShow: !0},
+            "/abtest/track/wutang/recs": {statFirstShow: !0},
+            "/abtest/myshazam/playlist/foryou": {statFirstShow: !0},
+            "/abtest/myshazam/playlist/greatesthits": {statFirstShow: !0, statScroll: !0},
+            "/abtest/myshazam/playlist/albums": {statFirstShow: !0},
+            "/partner/sc/preview": {previewSpotify: !0, statFirstShow: !0},
+            "/partner/sc/video": {autoplay: !1, statFirstShow: !0},
+            "/partner/sc/lyrics": {statFirstShow: !0},
+            "/partner/sc/recs": {statFirstShow: !0},
+            "/partner/viber/track": {sectionSet: "icons"},
+            "/partner/seat/track": {sectionSet: "icons"},
+            "/partner/bixby/preview": {previewSpotify: !0, statFirstShow: !0},
+            "/partner/bixby/video": {autoplay: !1, statFirstShow: !0},
+            "/partner/bixby/lyrics": {statFirstShow: !0},
+            "/partner/bixby/recs": {statFirstShow: !0},
+            "/careers": {sectionSet: "website"},
+            "/careers/candidate/privacynotice": {sectionSet: "website"},
+            "/developer/attributions": {sectionSet: "website"},
+            "/privacy": {sectionSet: "website"},
+            "/privacy/login": {sectionSet: "website"},
+            "/privacy/submit/download": {sectionSet: "website"},
+            "/privacy/submit/delete": {sectionSet: "website"},
+            "/discover": {sectionSet: "website"},
+            "/error": {sectionSet: "website"},
+            "/spotifyconnect": {sectionSet: "website"},
+            "/brands": {sectionSet: "website", sections: {header: {path: "/brands/header"}}},
+            "/partnerships": {sectionSet: "website", sections: {header: {path: "/partnerships/header"}}},
+            "/inapp/ios/attributions": {sectionSet: "website"},
+            "/inapp/mac/attributions": {sectionSet: "website"},
+            "/terms": {sectionSet: "website", sections: {header: {path: "/header/nodl"}}},
+            "/terms/msa": {sectionSet: "website", sections: {header: {path: "/header/nodl"}}},
+            "/validate-email": {sectionSet: "website", sections: {header: {path: "/header/nodl"}}},
+            "/verify/artist-deeplink": {sectionSet: "website"},
+            "/patents": {
+                sectionSet: "website",
+                data: {
+                    uspatents: ["6,990,453", "7,346,512", "7,359,889", "7,627,447", "7,739,062", "7,853,664", "7,865,368", "7,881,657", "7,986,913", "8,015,123", "8,806,171", "8,090,579", "8,190,435", "8,290,423", "8,386,258", "8,442,426", "8,543,395", "8,571,864", "8,686,271", "8,688,248", "8,688,600", "8,700,407", "8,725,829", "8,811,885", "8,816,179"],
+                    intlpatents: ["AU 1307833", "AU 1504445", "BE 1307833", "BE 1504445", "CA 2483104", "CN ZL02808938.6", "CN ZL2006101725723", "CN ZL01813565.X", "CN ZL200580008802.6", "DK 1307833", "DK 1504445", "EP 1307833", "EP 1504445", "EP 2070231", "FI 2070231", "FI 1504445", "FI 2070231", "FR 1307833", "FR 1504445", "FR 2070231", "DE 60120417", "DE 1504445", "DE 2070231", "GB 1307833", "GB 1504445", "GB 2070231", "GR 2070231", "GR 1504445", "HK 1051248", "HK 1073382", "HK 1135527", "IN 203994", "IE 1307833", "IE 1504445", "IE 2070231", "IT 1307833", "IT 1504445", "IT 2070231", "JP 4425126", "JP 4933899", "JP 4945877", "JP 5150266", "KR 10-776495", "KR 10-0820385", "KR 10-1413327", "NL 1307833", "NL 1504445", "NL 2070231", "PT 1307833", "PT 1504445", "ES 1307833", "ES 1504445", "ES 2070231", "SE 1307833", "SE 1504445", "CH 1307833", "CH 1504445", "TW 269196"]
+                }
+            },
+            "/company": {
+                sectionSet: "website",
+                data: {
+                    team: ["chairman", "ceo", "hr", "cpo", "cfo", "cto", "cso"],
+                    investors: ["kpcb", "ivp", "dn"],
+                    sales: ["northamerica", "latinamerica", "uk", "emea", "apac", "de"]
+                }
+            },
+            "/ux/svg/list": {sectionSet: "icons"},
+            "/campaign": {sectionSet: "icons"},
+            "/campaign/editor": {login: !0, sectionSet: "icons"},
+            "/campaign/editor/internal": {login: !0, sectionSet: "icons"},
+            "/campaign/editor/users": {login: !0},
+            "/portal/users": {login: !0},
+            "/login/internal/success": {login: !0},
+            "/example/phonegrid": {login: !0, sectionSet: "icons"},
+            "/example/videosync": {login: !0},
+            "/example/hackday/nomatchlyrics": {login: !0},
+            "/example/hackday/sars/searchplan": {login: !0}
+        }
+    },
+    servertime: 0
+}, updateWindow();</script>
+<script type="text/javascript" src="/builds/20180713-8f286ca-152056/website/main.js" defer="defer"></script>
+</html>

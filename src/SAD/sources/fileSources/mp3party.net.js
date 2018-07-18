@@ -20,7 +20,8 @@
             console.log("XHR onload mp3party.net searchPage start");
             let song = xhr.response.querySelector(".song-item a");
 
-            if(song === undefined){
+            if(song == undefined){
+                cycle.next();
                 return;
             }
 
@@ -48,6 +49,7 @@
             let songDownload = xhr.response.querySelector(".download a");
 
             if(songDownload == undefined){
+                cycle.next();
                 return;
             }
 
