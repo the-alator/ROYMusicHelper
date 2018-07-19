@@ -11,6 +11,7 @@ function setButtons(){
     logme("buttons set");
     $("article.shz-partial-track div.details").after("<button data-shz-beacon=\"type=btn,providerdesc=overflow-click\" class=\"ROYMusicHelperDownloadButton popup-btn\"><img alt='download' src='" + chrome.runtime.getURL("resources/images/general/download.png") + "'></button>");
     $(".ROYMusicHelperDownloadButton").click(function (event) {
+        console.log("DOWNLOAD BUTTON CLICKED");
         event.stopImmediatePropagation();
 
         let detailsDOM = $(event.target).parent().children(".details");
@@ -18,6 +19,7 @@ function setButtons(){
         let author = $(detailsDOM).find(".artist a").text();
 
         let text = title + " " + author;
+        console.log("TEXT: " + text);
         chrome.runtime.sendMessage({action: "processTitle", value: text});
     });
 }

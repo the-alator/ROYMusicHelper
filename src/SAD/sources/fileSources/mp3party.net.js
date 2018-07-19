@@ -21,6 +21,7 @@
             let song = xhr.response.querySelector(".song-item a");
 
             if(song == undefined){
+                console.log("song - " + song);
                 cycle.next();
                 return;
             }
