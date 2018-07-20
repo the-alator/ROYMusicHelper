@@ -1,6 +1,5 @@
+window.testSource = {};
 {
-    let testSource = {};
-
     testSource.name = "AAAA.net";
     testSource.baseSearchUrl = "http://AAAA.net/search?q=";
     testSource.baseSongPageUrl = "http://AAAA.net";

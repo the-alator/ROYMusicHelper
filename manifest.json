@@ -37,6 +37,11 @@
       "matches": ["http://zk.fm/?UNIQUEROYMUSICHELPER=E"],
       "js": ["/lib/jquery-3.3.1.min.js", "/src/injects/zkFmIframeDownloader.js"],
       "all_frames": true
+    },
+    {
+      "run_at": "document_start",
+      "matches": ["http://mp3party.net/*"],
+      "js": ["/lib/jquery-3.3.1.min.js", "/src/injects/mp3party.net.js"]
     }
   ],
   "web_accessible_resources": ["resources/images/general/*"]

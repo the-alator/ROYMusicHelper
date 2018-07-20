@@ -23,5 +23,8 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
         case "processTitle":
             processTitle(request.value);
             break;
+        case "processSongPage":
+            window[request.windowObject].processSongPage(request.value);
+            break;
     }
 });

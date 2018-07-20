@@ -1,6 +1,5 @@
+window.zaycevNetSource = {};
 {
-    let zaycevNetSource = {};
-
     zaycevNetSource.name = "zaycev.net";
     zaycevNetSource.baseSearchUrl = "http://zaycev.net/search.html?query_search=";
     zaycevNetSource.baseSongPageUrl = "http://zaycev.net";

@@ -1,6 +1,5 @@
+window.mp3partyNetSource = {};
 {
-    let mp3partyNetSource = {};
-
     mp3partyNetSource.name = "mp3party.net";
     mp3partyNetSource.baseSearchUrl = "http://mp3party.net/search?q=";
     mp3partyNetSource.baseSongPageUrl = "http://mp3party.net";

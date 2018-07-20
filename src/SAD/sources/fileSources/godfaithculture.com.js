@@ -1,6 +1,5 @@
+window.godfaithcultureComSource = {};
 {
-    let godfaithcultureComSource = {};
-
     godfaithcultureComSource.name = "godfaithculture.com";
     godfaithcultureComSource.baseSearchUrl = "http://godfaithculture.com/music/";
     godfaithcultureComSource.requestMethod = "GET";

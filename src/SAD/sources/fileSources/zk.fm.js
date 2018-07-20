@@ -1,6 +1,5 @@
+window.zkFmSource = {};
 {
-    let zkFmSource = {};
-
     zkFmSource.name = "zk.fm";
     zkFmSource.baseSearchUrl = "http://zk.fm/mp3/search?keywords=";
     zkFmSource.baseDownloadUrl = "http://zk.fm";
