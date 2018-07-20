@@ -9,6 +9,16 @@ function print(text) {
     console.innerHTML += text;
 }
 
+let DOM_responce_on_js_change = document.getElementById("DOM_responce_on_js_change");
+let DOM_response = document.createElement("div");
+DOM_response.innerHTML = "DOM is not responsive";
+
+document.body.insertBefore(DOM_response, console);
+
+DOM_responce_on_js_change.addEventListener("click", function(){
+    DOM_response.innerHTML = "DOM is responsive";
+});
+
 println("Console initialised!");
 
 try { println(niV); } catch(e){println(e)}
