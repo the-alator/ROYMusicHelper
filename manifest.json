@@ -29,8 +29,9 @@
   "content_scripts": [
     {
       "run_at": "document_start",
-      "matches": ["https://www.shazam.com/*", "http://localhost:63342/ROYMusicHelper/sandbox/jsFeatures/main.html*"],
-      "js": ["/lib/jquery-3.3.1.min.js", "/src/injects/shazam.js"]
+      "matches": ["https://www.shazam.com/*"],
+      "js": ["/lib/jquery-3.3.1.min.js", "/src/injects/shazam.js"],
+      "css": ["/src/injects/shazam.css"]
     },
     {
       "run_at": "document_start",
