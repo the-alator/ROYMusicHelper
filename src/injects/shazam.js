@@ -4,10 +4,14 @@ window.addEventListener('popstate', function () {
 $(document).ready(function () {
     console.log("READY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     console.log(window.location.href);
-    console.log($(document).clone().get());
+    console.log(document);
 
     $(".main").on("DOMSubtreeModified", function(event){
-        $(".main").off("DOMSubtreeModified");
+        // $(".main").off("DOMSubtreeModified");
+        if(event.target !== event.currentTarget){
+            return;
+        }
+        console.log("MAIN modified");
         $(".shz-frame-myshazam-shazams").on("DOMSubtreeModified", setButtons);
     });
 });
