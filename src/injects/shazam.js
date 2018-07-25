@@ -1,7 +1,7 @@
 window.addEventListener('popstate', function () {
     console.log("HREF CHANGED");
 });
-$(document).ready(function () {
+$(function () {
     console.log("READY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     console.log(window.location.href);
     console.log(document);

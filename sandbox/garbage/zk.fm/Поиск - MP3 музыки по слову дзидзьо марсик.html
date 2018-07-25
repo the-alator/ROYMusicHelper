@@ -1737,7 +1737,7 @@
                                             }
 
 
-                                            $(document).ready(function () {
+                                            $(function () {
                                                 $('#bolt').click(function () {
                                                     if ($(this).attr('data-while') == 'sort') {
                                                         $(this).attr('data-while', 'settings');
@@ -2060,7 +2060,7 @@
 
     soundManager.url = '/themes/classic/assets/swf/';
 
-    $(document).ready(function () {
+    $(function () {
         $('#player').zvPlayer();
         soundManager.beginDelayedInit();
         $("img.lazy").lazyload();
@@ -2181,7 +2181,7 @@
         var topPos = getTopOffset(block);
         // var topPos2 = getTopOffset( block2 );
 
-        $(document).ready(function () {
+        $(function () {
             $(window).scroll(function () {
                 var scrollHeight = Math.max(document.documentElement.scrollHeight, document.documentElement.clientHeight),
 

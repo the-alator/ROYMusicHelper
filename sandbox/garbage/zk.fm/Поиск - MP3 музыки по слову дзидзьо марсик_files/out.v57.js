@@ -3819,7 +3819,7 @@ function explode(a, l) {
             a.noop)
     })
 })(jQuery);
-$(document).ready(function () {
+$(function () {
     $("#plpop .playlist-play").each(function (a, c) {
         $(c).attr("rel") && ($(c).unbind("click"), $(c).click(function (a) {
             $("#plpop-playlists").hide();
@@ -5820,7 +5820,7 @@ eval(function (p, a, c, k, e, r) {
             timers[uniqueId] = setTimeout(callback, ms)
         }
     }();
-    $(document).ready(function () {
+    $(function () {
         try {
             $(document).on("click", ".rrssb-buttons a.popup2", {}, function popUp(e) {
                 var self = $(this);
@@ -5871,7 +5871,7 @@ function showTopNotifyNotAutoClose(notify_string) {
     $("#top_error_notify").fadeIn()
 }
 
-$(document).ready(function () {
+$(function () {
     function hidePlaylistPreloader() {
         $(".playlists-list-item").hide();
         $(".playlists-preloader").fadeOut();

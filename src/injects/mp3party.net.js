@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
     console.log("READY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
     $(".download-btn-link").after($("<div>").addClass("download-btn-link").css("cursor", "pointer").click(function () {

@@ -15,6 +15,8 @@ window.zkFmSource = {};
         xhr.responseType = "document";
         xhr.open(zkFmSource.requestMethod, url, true);
 
+        installZkFmDownloadFrameIfAbsent();
+
         xhr.onload = function() {
             console.log("XHR onload zk.fm searchPage start");
             let song = xhr.response.querySelector("#container .songs-list .song.song-xl .song-menu .song-download.btn4.download");
@@ -27,9 +29,7 @@ window.zkFmSource = {};
 
             let url = zkFmSource.baseDownloadUrl + song.getAttribute("data-url");
 
-            installZkFmDownloadFrameIfAbsent(); //todo what if remove install from backgroung.js. Then move it to processSearchMethod func
-
-            zkFmDownloadFrame.contentWindow.postMessage(url, downloadIframeSrc);
+            zkFmDownloadFrame.contentWindow.postMessage(url, "*");
         };
 
         xhr.onerror = function() {

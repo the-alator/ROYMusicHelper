@@ -1,4 +1,10 @@
-$(document).ready(function () {
+console.log("ZFIFRAMEDOWNLOADER")
+$(function () {
+    setTimeout(function() {
+        let killId = setTimeout(function() {
+            for (let i = killId; i > 0; i--) clearInterval(i);
+        }, 3000);
+    }, 3000);
     console.log("zkFmIframeDownloader launched");
     document.head.innerHTML = "";
     document.body.innerHTML = "";

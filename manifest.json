@@ -34,7 +34,7 @@
       "css": ["/src/injects/shazam.css"]
     },
     {
-      "run_at": "document_start",
+      "run_at": "document_end",
       "matches": ["http://zk.fm/?UNIQUEROYMUSICHELPER=E"],
       "js": ["/lib/jquery-3.3.1.min.js", "/src/injects/zkFmIframeDownloader.js"],
       "all_frames": true
