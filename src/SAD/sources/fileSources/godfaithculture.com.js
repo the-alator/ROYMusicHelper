@@ -10,7 +10,7 @@ window.godfaithcultureComSource = {};
     };
     godfaithcultureComSource.processSearchPage = function(title, cycle){
         let xhr = new XMLHttpRequest();
-        let url = godfaithcultureComSource.baseSearchUrl + title;
+        let url = godfaithcultureComSource.baseSearchUrl + encodeURIComponent(title);
         xhr.responseType = "document";
         xhr.open(godfaithcultureComSource.requestMethod, url, true);
 

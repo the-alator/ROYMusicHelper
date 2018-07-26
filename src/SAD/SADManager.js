@@ -3,9 +3,7 @@
 
 
     function processTitle(title) {
-        console.log("SADMAnager#processTitle before" + title);
-        title = encodeURIComponent(title);
-        console.log("SADMAnager#processTitle after" + title);
+        console.log("SADMAnager#processTitle" + title);
         let cycle = new AsyncCycle(supportedSources, function (source) {
                 console.log("Current source - " + source.name);
                 source.processTitle(title, this);
@@ -39,7 +37,6 @@
     function registerSource(object) {
         supportedSources.push(object);
     }
-
 
 }
 //SAD means "Search And Download"

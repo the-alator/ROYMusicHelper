@@ -11,7 +11,7 @@ window.testSource = {};
     };
     testSource.processSearchPage = function(title, cycle){
         let xhr = new XMLHttpRequest();
-        let url = testSource.baseSearchUrl + title;
+        let url = testSource.baseSearchUrl + encodeURIComponent(title);
         xhr.responseType = "document";
         xhr.open(testSource.requestMethod, url, true);
 

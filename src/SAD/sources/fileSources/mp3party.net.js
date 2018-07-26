@@ -11,7 +11,7 @@ window.mp3partyNetSource = {};
     };
     mp3partyNetSource.processSearchPage = function(title, cycle){
         let xhr = new XMLHttpRequest();
-        let url = mp3partyNetSource.baseSearchUrl + title;
+        let url = mp3partyNetSource.baseSearchUrl + encodeURIComponent(title);
         xhr.responseType = "document";
         xhr.open(mp3partyNetSource.requestMethod, url, true);
 

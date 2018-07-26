@@ -11,7 +11,7 @@ window.zkFmSource = {};
     };
     zkFmSource.processSearchPage = function(title, cycle){
         let xhr = new XMLHttpRequest();
-        let url = zkFmSource.baseSearchUrl + title;
+        let url = zkFmSource.baseSearchUrl + encodeURIComponent(title);
         xhr.responseType = "document";
         xhr.open(zkFmSource.requestMethod, url, true);
 

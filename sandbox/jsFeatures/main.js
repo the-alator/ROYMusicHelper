@@ -67,3 +67,8 @@ try { println(nifL); } catch(e){println(e)}
 println("narrowed in brackets:");
 try { println(nbrV); } catch(e){println(e)}
 try { println(nbrL); } catch(e){println(e)}
+
+println("Comparison");
+println(!!undefined);
+println(!!null);
+println(!!NaN);
