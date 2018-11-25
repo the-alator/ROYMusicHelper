@@ -29,7 +29,7 @@ window.zaycevNetSource = {};
                 songs.push(temp);
             });
 
-            textComparator.sieve(songs, title);
+            // textComparator.sieve(songs, title);
 
             if(songs.length === 0){
                 console.log("no songs");

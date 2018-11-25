@@ -2,11 +2,23 @@ chrome.runtime.onInstalled.addListener(function() {
     console.log("EXTENSION INSTALLED");
 
     installZkFmDownloadFrameIfAbsent();
+    initLogging();
+    chrome.tabs.create({url: DEBUG_HTML_PAGE});
+
+
 });
 let zkFmDownloadFrame;
 let downloadIframeSrc = "http://zk.fm/?UNIQUEROYMUSICHELPER=E";
 let downloadIframeId = "zkFmDownloadIframe";
-
+let log;
+function initLogging() {
+    log = new Log4js.getLogger("l1");
+    log.setLevel(Log4js.Level.ALL);
+    let appender = new Log4js.BrowserConsoleAppender(true);
+    appender.setLayout(new Log4js.SimpleLayout());
+    log.addAppender(appender);
+    log.info("qwe");
+}
 function installZkFmDownloadFrameIfAbsent(){
     if($("#" + downloadIframeId).length === 0) {
         console.log("new zk.fm iframe created");

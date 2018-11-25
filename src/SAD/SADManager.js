@@ -3,6 +3,7 @@
 
 
     function processTitle(title) {
+        log.info("LOG FROM PROCESS TITLE");
         console.log("SADMAnager#processTitle" + title);
         let cycle = new AsyncCycle(supportedSources, function (source) {
                 console.log("Current source - " + source.name);

@@ -1,0 +1,1 @@
+const DEBUG_HTML_PAGE = "src/main/general/debug.html";

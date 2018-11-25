@@ -4,7 +4,7 @@ function AsyncCycle(list, cycleBody, cycleFinal){
     this.cycleBody = cycleBody;
     this.next = function(){
         console.log("next is started. CI - " + this.currentIndex + " list.length - " + this.list.length);
-        if(this.currentIndex === this.list.length){
+        if(this.currentIndex === this.list.length && this.cycleFinal){
             this.cycleFinal();
             return;
         }
