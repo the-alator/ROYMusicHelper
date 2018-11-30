@@ -32,6 +32,6 @@ function setButtons(event){
         let author = $(detailsDOM).find(".artist .ellip").text();
 
         let text = title + " " + author;
-        chrome.runtime.sendMessage({action: "processTitle", value: text});
+        chrome.runtime.sendMessage({action: "getSongListByTitle", value: text});
     });
 }

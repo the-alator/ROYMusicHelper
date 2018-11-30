@@ -1,16 +1,25 @@
-chrome.runtime.onInstalled.addListener(function() {
-    console.log("EXTENSION INSTALLED");
-
-    installZkFmDownloadFrameIfAbsent();
-    initLogging();
-    chrome.tabs.create({url: DEBUG_HTML_PAGE});
-
-
-});
 let zkFmDownloadFrame;
 let downloadIframeSrc = "http://zk.fm/?UNIQUEROYMUSICHELPER=E";
 let downloadIframeId = "zkFmDownloadIframe";
 let log;
+
+let searchManager;
+let sourceManager;
+
+chrome.runtime.onInstalled.addListener(function() {
+    init();
+    installZkFmDownloadFrameIfAbsent();
+    initLogging();
+    log.info("EXTENSION INSTALLED");
+
+    chrome.tabs.create({url: DEBUG_HTML_PAGE});
+});
+
+function init() {
+    searchManager = new AsyncSadManager();
+    sourceManager = new SourceManager();
+}
+
 function initLogging() {
     log = new Log4js.getLogger("l1");
     log.setLevel(Log4js.Level.ALL);
@@ -29,11 +38,11 @@ function installZkFmDownloadFrameIfAbsent(){
 chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
     console.log("message received!");
     switch (request.action){
-        case "processTitle":
-            processTitle(request.value);
+        case "getSongListByTitle":
+            searchManager.getSongListByTitle(request.value);
             break;
-        case "processSongPage":
-            window[request.windowObject].processSongPage(request.value);
+        case "getDownloadUrlForSong":
+            window[request.windowObject].getDownloadUrlForSong(request.value);
             break;
     }
 });

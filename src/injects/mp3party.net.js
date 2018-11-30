@@ -3,7 +3,7 @@ $(function () {
 
     $(".download-btn-link").after($("<div>").addClass("download-btn-link").css("cursor", "pointer").click(function () {
         let href = "http://mp3party.net" + $(this).parent().children(".name").children("a").attr("href");
-        chrome.runtime.sendMessage({action: "processSongPage", value: href, windowObject: "mp3partyNetSource"});
+        chrome.runtime.sendMessage({action: "getDownloadUrlForSong", value: href, windowObject: "mp3partyNetSource"});
     })).remove();
 });
 

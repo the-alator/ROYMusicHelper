@@ -5,44 +5,38 @@ window.mp3partyNetSource = {};
     mp3partyNetSource.baseSongPageUrl = "http://mp3party.net";
     mp3partyNetSource.requestMethod = "GET";
 
-    mp3partyNetSource.processTitle = function(title, cycle){
-        console.log("In process title mp3party");
-        this.processSearchPage(title, cycle);
-    };
-    mp3partyNetSource.processSearchPage = function(title, cycle){
-        let xhr = new XMLHttpRequest();
-        let url = mp3partyNetSource.baseSearchUrl + encodeURIComponent(title);
-        xhr.responseType = "document";
-        xhr.open(mp3partyNetSource.requestMethod, url, true);
-
-        xhr.onload = function() {
-            console.log("XHR onload mp3party.net searchPage start");
-            let song = xhr.response.querySelector(".song-item a");
-
-            if(song == undefined){
-                console.log("song - " + song);
-                cycle.next();
-                return;
-            }
-
-            let songPageUrl = mp3partyNetSource.baseSongPageUrl + song.getAttribute("href");
-            console.log("song page url - " + songPageUrl);
-
-            mp3partyNetSource.processSongPage(songPageUrl, cycle);
-        };
-
-        xhr.onerror = function() {
-            console.log("[ERROR] - XHR searchPage");
-            cycle.next();
-        };
-
-        xhr.send();
+    mp3partyNetSource.getSongListByTitle = function(title, responseManager){
+        $.get(mp3partyNetSource.baseSearchUrl + encodeURIComponent(title))
+            .done(function () {
+                let songs = [];
+                $(".song-item a").each(function () {
+                    songs.push({
+                            source: mp3partyNetSource,
+                            url: $(this).attr("href")
+                        });
+                });
+                responseManager.success(songs);
+            })
+            .fail(function () {
+                responseManager.fail();
+            });
     };
 
-    mp3partyNetSource.processSongPage = function(url, cycle){
-        let xhr = new XMLHttpRequest();
-        xhr.responseType = "document";
-        xhr.open(mp3partyNetSource.requestMethod, url, true);
+    mp3partyNetSource.getDownloadUrlForSong = function(song){
+        $.get(song.url)
+            .done(function () {
+            let songs = [];
+            $(".song-item a").each(function () {
+                songs.push({
+                    source: mp3partyNetSource,
+                    url: $(this).attr("href")
+                });
+            });
+            responseManager.success(songs);
+        })
+            .fail(function () {
+                responseManager.fail();
+            });
 
         xhr.onload = function() {
             console.log("XHR onload mp3party.net songPage start");

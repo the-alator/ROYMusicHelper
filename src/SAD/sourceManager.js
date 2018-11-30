@@ -1,18 +1,13 @@
-{
+function SourceManager() {
     let supportedSources = [];
 
+    this.registerSource = function(object) {
+        log.debug("Registered source " + object.name);
+        supportedSources.push(object);
+    };
 
-    function processTitle(title) {
-        log.info("LOG FROM PROCESS TITLE");
-        console.log("SADMAnager#processTitle" + title);
-        let cycle = new AsyncCycle(supportedSources, function (source) {
-                console.log("Current source - " + source.name);
-                source.processTitle(title, this);
-        });
-
-
-        cycle.next()
-
+    this.getSupportedSources  = function() {
+        return supportedSources;
     }
 
     function downloadFile(url) {
@@ -35,9 +30,5 @@
 
     }
 
-    function registerSource(object) {
-        supportedSources.push(object);
-    }
 
 }
-//SAD means "Search And Download"
