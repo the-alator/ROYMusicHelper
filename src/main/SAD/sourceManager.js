@@ -8,27 +8,6 @@ function SourceManager() {
 
     this.getSupportedSources  = function() {
         return supportedSources;
-    }
-
-    function downloadFile(url) {
-        console.log("downloadUrl - " + url);
-        if (url !== undefined) {
-            let downloadError;
-
-            let downloadOpts = {url: url};
-            chrome.downloads.download(downloadOpts);
-
-
-            if (downloadError === undefined) {
-                console.log("downloaded!");
-                return true;
-            }
-            console.log("downloading error!");
-        }
-
-        return false;
-
-    }
-
+    };
 
 }

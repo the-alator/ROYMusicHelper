@@ -6,11 +6,14 @@ let log;
 let searchManager;
 let songSetsManager;
 let sourceManager;
+let downloadManager;
+let textCleaner;
+
+init();
+initLogging();
 
 chrome.runtime.onInstalled.addListener(function() {
-    init();
     installZkFmDownloadFrameIfAbsent();
-    initLogging();
     log.info("EXTENSION INSTALLED");
 
     chrome.tabs.create({url: DEBUG_HTML_PAGE});
@@ -18,9 +21,15 @@ chrome.runtime.onInstalled.addListener(function() {
 
 function init() {
     sourceManager = new SourceManager();
-    searchManager = new AsyncSadManager();
 
-    songSetsManager = new SongSetsManager();
+    textCleaner = new TextCleaner(
+        [new ParenthesesCleaner(), new OtherSymbolsCleaner(), new CaseCleaner()]
+    );
+
+    downloadManager = new DownloadManager();
+    songSetsManager = new SongSetsManager(textCleaner, downloadManager);
+
+    searchManager = new AsyncSadManager(songSetsManager);
 }
 
 function initLogging() {
@@ -42,7 +51,7 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
     console.log("message received!");
     switch (request.action){
         case "getSongListByTitle":
-            searchManager.getSongListByTitle(request.value);
+            searchManager.processTitle(request.value);
             break;
         case "getDownloadUrlForSong":
             window[request.windowObject].getDownloadUrlForSong(request.value);

@@ -19,32 +19,38 @@
     "scripts": ["/lib/jquery-3.3.1.min.js",
       "/src/main/configuration/constants.js",
       "/lib/log4js.combined.js",
-      "/src/main/general/background.js",
-      "/src/SAD/SADManager.js",
-      "/src/SAD/sources/fileSources/mp3party.net.js",
-      "/src/SAD/sources/fileSources/zaycev.net.js",
-      "/src/SAD/sources/fileSources/zk.fm.js",
-      "/src/SAD/sources/fileSources/godfaithculture.com.js",
-      "/src/SAD/cycle.js"],
+      "/lib/compare-strings.js",
+      "/src/main/core/textCleaner.js",
+      "/src/main/SAD/sourceManager.js",
+      "/src/main/core/sourceResponseManager.js",
+      "/src/main/core/asyncSadManager.js",
+      "/src/main/core/downloadManager.js",
+      "/src/main/core/songSetsManager.js",
+      "/src/main/extension/background.js",
+      "/src/main/SAD/sources/fileSources/mp3party.net.js",
+//      "/src/SAD/sources/fileSources/zaycev.net.js",
+//      "/src/SAD/sources/fileSources/zk.fm.js",
+//      "/src/SAD/sources/fileSources/godfaithculture.com.js",
+      "/src/main/SAD/cycle.js"],
     "persistent": true
   },
   "content_scripts": [
     {
       "run_at": "document_start",
       "matches": ["https://www.shazam.com/*"],
-      "js": ["/lib/jquery-3.3.1.min.js", "/src/injects/shazam.js"],
-      "css": ["/src/injects/shazam.css"]
+      "js": ["/lib/jquery-3.3.1.min.js", "/src/main/injects/shazam.js"],
+      "css": ["/src/main/injects/shazam.css"]
     },
     {
       "run_at": "document_end",
       "matches": ["http://zk.fm/?UNIQUEROYMUSICHELPER=E"],
-      "js": ["/lib/jquery-3.3.1.min.js", "/src/injects/zkFmIframeDownloader.js"],
+      "js": ["/lib/jquery-3.3.1.min.js", "/src/main/injects/zkFmIframeDownloader.js"],
       "all_frames": true
     },
     {
       "run_at": "document_end",
       "matches": ["http://mp3party.net/*"],
-      "js": ["/lib/jquery-3.3.1.min.js", "/src/injects/mp3party.net.js"]
+      "js": ["/lib/jquery-3.3.1.min.js", "/src/main/injects/mp3party.net.js"]
     }
   ],
   "web_accessible_resources": ["resources/images/general/*"]

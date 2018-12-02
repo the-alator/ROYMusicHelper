@@ -3,13 +3,11 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js"></script>
+    <link rel="stylesheet" href="mocha.css">
+    <script src="mocha.js"></script>
+    <script src="chai.js"></script>
     <script>
         mocha.setup('bdd');
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script>
-    <script>
         var assert = chai.assert;
     </script>
 </head>
@@ -17,11 +15,9 @@
 <body>
 
 
-<!-- в элементе с id="mocha" будут результаты тестов -->
 <div id="mocha"></div>
 
-<!-- запустить тесты! -->
-<script src="core/textCleaners.js"></script>
+<script src="../main/core/textCleaner.js"></script>
 <script src="core/textCleanerSpec.js"></script>
 
 <script>
@@ -30,3 +26,4 @@
 </body>
 
 </html>
+
