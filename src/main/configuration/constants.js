@@ -1,1 +1,1 @@
-const DEBUG_HTML_PAGE = "src/main/general/debug.html";
+const DEBUG_HTML_PAGE = "src/main/popup/debug.html";

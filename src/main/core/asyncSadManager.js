@@ -1,15 +1,10 @@
 function AsyncSadManager() {
     this.processTitle = function(title) {
+        let sourceResponseManager = new SourceResponseManager();
 
-
-        console.log("SADMAnager#getSongListByTitle" + title);
-        let cycle = new AsyncCycle(supportedSources, function (source) {
-            console.log("Current source - " + source.name);
-            source.getSongListByTitle(title, this);
+        sourceManager.getSupportedSources().forEach(function (source) {
+            source.getSongListByTitle(title, sourceResponseManager);
         });
-
-
-        cycle.next()
 
     }
 }

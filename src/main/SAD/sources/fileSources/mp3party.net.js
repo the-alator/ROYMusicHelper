@@ -63,6 +63,6 @@ window.mp3partyNetSource = {};
         xhr.send();
     };
 
-    registerSource(mp3partyNetSource);
+    sourceManager.registerSource(mp3partyNetSource);
 }
 

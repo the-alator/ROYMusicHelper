@@ -4,6 +4,7 @@ let downloadIframeId = "zkFmDownloadIframe";
 let log;
 
 let searchManager;
+let songSetsManager;
 let sourceManager;
 
 chrome.runtime.onInstalled.addListener(function() {
@@ -16,8 +17,10 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 function init() {
-    searchManager = new AsyncSadManager();
     sourceManager = new SourceManager();
+    searchManager = new AsyncSadManager();
+
+    songSetsManager = new SongSetsManager();
 }
 
 function initLogging() {

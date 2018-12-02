@@ -10,7 +10,7 @@ ajt1B.addEventListener("click", function (e) {
     console.appendChild(textNode("Clicked"));
 });
 
-let absDebugPageLocation = "/src/main/general/debug.html";
+let absDebugPageLocation = "/src/main/popup/debug.html";
 $("#inPopupDebug").click(function (e) {
     window.location = absDebugPageLocation;
 });
