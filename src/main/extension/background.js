@@ -29,7 +29,7 @@ function init() {
     downloadManager = new DownloadManager();
     songSetsManager = new SongSetsManager(textCleaner, downloadManager);
 
-    searchManager = new AsyncSadManager(songSetsManager);
+    searchManager = new AsyncSadManager(songSetsManager, textCleaner);
 }
 
 function initLogging() {

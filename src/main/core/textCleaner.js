@@ -4,6 +4,7 @@ function TextCleaner(textCleaners) {
         textCleaners.forEach(cleaner => {
             text = cleaner.doClean(text);
         })
+        return text;
     }
 }
 

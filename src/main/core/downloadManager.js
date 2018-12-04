@@ -5,16 +5,20 @@ function DownloadManager() {
     };
 
     function recurs(songsList, index) {
-        if(index >= songsList.length()) {
+        log.debug("Recurs with index " + index);
+        if(index >= songsList.length) {
+            log.debug("List is empty");
             return;
         }
-        song.source.getDownloadUrlForSong(song).then(
+        songsList[index].source.getDownloadUrlForSong(songsList[index]).then(
             function(url) {
                 let downloadResult = downloadFile(url);
+                log.debug("downloadResult " + downloadResult);
+
                 if(!downloadResult) {
-                    recurs(songsList, index++);
+                    recurs(songsList, index + 1);
                 }
-            }, () => recurs(songsList, index++)
+            }, () => recurs(songsList, index + 1)
         );
     }
 
