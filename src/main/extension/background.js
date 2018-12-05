@@ -7,7 +7,8 @@ let searchManager;
 let songSetsManager;
 let sourceManager;
 let downloadManager;
-let textCleaner;
+let inputTextCleaner;
+let fetchedTextCleaner;
 
 init();
 initLogging();
@@ -22,8 +23,12 @@ chrome.runtime.onInstalled.addListener(function() {
 function init() {
     sourceManager = new SourceManager();
 
-    textCleaner = new TextCleaner(
+    inputTextCleaner = new TextCleaner(
         [new ParenthesesCleaner(), new OtherSymbolsCleaner(), new CaseCleaner()]
+    );
+
+    fetchedTextCleaner = new TextCleaner(
+        [new OtherSymbolsCleaner(), new CaseCleaner()]
     );
 
     downloadManager = new DownloadManager();
