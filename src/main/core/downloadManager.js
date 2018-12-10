@@ -1,3 +1,6 @@
+const log4js = require('log4js');
+const log = log4js.getLogger();
+
 function DownloadManager() {
 
     this.process = function (songsList) {
@@ -43,3 +46,5 @@ function DownloadManager() {
     }
 
 }
+
+module.exports = DownloadManager;

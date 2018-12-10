@@ -1,3 +1,5 @@
+const log4js = require('log4js'); const log = log4js.getLogger();
+
 function SourceResponseManager(title, songsSetsManager) {
     const SUCCESSFUL_RESPONSES_TO_START_PROCESSING = 1;
     let responsesCount = 0;
@@ -29,3 +31,5 @@ function SourceResponseManager(title, songsSetsManager) {
         responsesCount++;
     }
 }
+
+module.exports = SourceResponseManager;

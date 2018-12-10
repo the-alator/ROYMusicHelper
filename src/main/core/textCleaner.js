@@ -1,9 +1,11 @@
+const log4js = require('log4js'); const log = log4js.getLogger();
+
 function TextCleaner(textCleaners) {
 
     this.clean = function(text) {
         textCleaners.forEach(cleaner => {
             text = cleaner.doClean(text);
-        })
+        });
         return text;
     }
 }
@@ -30,3 +32,7 @@ function CaseCleaner() {
     }
 }
 
+module.exports.ParenthesesCleaner = ParenthesesCleaner;
+module.exports.TextCleaner = TextCleaner;
+module.exports.OtherSymbolsCleaner = OtherSymbolsCleaner;
+module.exports.CaseCleaner = CaseCleaner;

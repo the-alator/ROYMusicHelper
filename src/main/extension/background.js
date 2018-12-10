@@ -1,34 +1,48 @@
+const log4js = require('log4js');
+log4js.configure({
+    appenders: {
+        out: { type: 'console', layout: { type: 'basic' } },
+    },
+    categories: {
+        default: { appenders: [ 'out'], level: 'debug' }
+    }
+});
+
+const SourceResponseManager = require("../core/sourceResponseManager");
+const ParenthesesCleaner = require("../core/textCleaner").ParenthesesCleaner;
+const TextCleaner = require("../core/textCleaner").TextCleaner;
+const OtherSymbolsCleaner = require("../core/textCleaner").OtherSymbolsCleaner;
+const CaseCleaner = require("../core/textCleaner").CaseCleaner;
+const SourceManager = require("../SAD/sourceManager");
+
+const DownloadManager = require("../core/DownloadManager");
+const SongSetsManager = require("../core/SongSetsManager");
+const AsyncSadManager = require("../core/AsyncSadManager");
+
 let zkFmDownloadFrame;
 let downloadIframeSrc = "http://zk.fm/?UNIQUEROYMUSICHELPER=E";
 let downloadIframeId = "zkFmDownloadIframe";
-let log;
 
 let searchManager;
 let songSetsManager;
 let sourceManager;
 let downloadManager;
-let inputTextCleaner;
-let fetchedTextCleaner;
+let textCleaner;
+
+const log = log4js.getLogger("background");
 
 init();
 initLogging();
+installZkFmDownloadFrameIfAbsent();
+log.info("EXTENSION INSTALLED");
 
-chrome.runtime.onInstalled.addListener(function() {
-    installZkFmDownloadFrameIfAbsent();
-    log.info("EXTENSION INSTALLED");
-
-    chrome.tabs.create({url: DEBUG_HTML_PAGE});
-});
+chrome.tabs.create({url: DEBUG_HTML_PAGE});
 
 function init() {
     sourceManager = new SourceManager();
 
-    inputTextCleaner = new TextCleaner(
+    textCleaner = new TextCleaner(
         [new ParenthesesCleaner(), new OtherSymbolsCleaner(), new CaseCleaner()]
-    );
-
-    fetchedTextCleaner = new TextCleaner(
-        [new OtherSymbolsCleaner(), new CaseCleaner()]
     );
 
     downloadManager = new DownloadManager();
@@ -38,12 +52,7 @@ function init() {
 }
 
 function initLogging() {
-    log = new Log4js.getLogger("l1");
-    log.setLevel(Log4js.Level.ALL);
-    let appender = new Log4js.BrowserConsoleAppender(true);
-    appender.setLayout(new Log4js.SimpleLayout());
-    log.addAppender(appender);
-    log.info("qwe");
+
 }
 function installZkFmDownloadFrameIfAbsent(){
     if($("#" + downloadIframeId).length === 0) {
@@ -56,10 +65,13 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
     console.log("message received!");
     switch (request.action){
         case "getSongListByTitle":
-            searchManager.processTitle(request.value);
+            let sourceResponseManager = new SourceResponseManager(title, songSetsManager);
+            searchManager.processTitle(request.value, sourceResponseManager);
             break;
         case "getDownloadUrlForSong":
             window[request.windowObject].getDownloadUrlForSong(request.value);
             break;
     }
 });
+
+module.exports.log = log;

@@ -1,9 +1,10 @@
+const log4js = require('log4js'); const log = log4js.getLogger();
+
 function AsyncSadManager(songSetsManager, textCleaner) {
-    this.processTitle = function(title) {
+    this.processTitle = function(title, sourceResponseManagerR) {
         log.debug("The title - " + title);
         title = textCleaner.clean(title);
         log.debug("The cleaned title - " + title);
-        let sourceResponseManager = new SourceResponseManager(title, songSetsManager);
 
         sourceManager.getSupportedSources().forEach(function (source) {
             source.getSongListByTitle(title, sourceResponseManager);
@@ -12,4 +13,4 @@ function AsyncSadManager(songSetsManager, textCleaner) {
     }
 }
 
-
+module.exports = AsyncSadManager;

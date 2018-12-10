@@ -1,3 +1,5 @@
+const log4js = require('log4js'); const log = log4js.getLogger();
+
 const LIMIT_OF_SONGS_IN_LIST = 10;
 
 function SongSetsManager(textCleaner, downloadManager) {
@@ -58,3 +60,5 @@ function SongSetsManager(textCleaner, downloadManager) {
     };
 
 }
+
+module.exports = SongSetsManager;

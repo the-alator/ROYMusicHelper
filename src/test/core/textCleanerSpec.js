@@ -1,8 +1,11 @@
+const cleaner = require("../../main/core/textCleaner");
+const assert = require("../chai").assert;
+
 describe("Cleaners spec", function () {
    describe("Parentheses cleaner", function () {
        let parenthesesCleaner;
        beforeEach(function () {
-           parenthesesCleaner = new ParenthesesCleaner();
+           parenthesesCleaner = new cleaner.ParenthesesCleaner();
        });
        it('should delete square parentheses with content', function () {
            assert.equal(parenthesesCleaner.doClean("q (q)"), "q ");

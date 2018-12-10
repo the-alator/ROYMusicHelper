@@ -11,3 +11,5 @@ function SourceManager() {
     };
 
 }
+
+module.exports = SourceManager;
