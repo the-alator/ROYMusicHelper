@@ -1,12 +1,4 @@
-const log4js = require('log4js');
-log4js.configure({
-    appenders: {
-        out: { type: 'console', layout: { type: 'basic' } },
-    },
-    categories: {
-        default: { appenders: [ 'out'], level: 'debug' }
-    }
-});
+const log = require("../additional/logger");
 
 const SourceResponseManager = require("../core/sourceResponseManager");
 const ParenthesesCleaner = require("../core/textCleaner").ParenthesesCleaner;
@@ -29,10 +21,8 @@ let sourceManager;
 let downloadManager;
 let textCleaner;
 
-const log = log4js.getLogger("background");
 
 init();
-initLogging();
 installZkFmDownloadFrameIfAbsent();
 log.info("EXTENSION INSTALLED");
 
@@ -51,9 +41,6 @@ function init() {
     searchManager = new AsyncSadManager(songSetsManager, textCleaner);
 }
 
-function initLogging() {
-
-}
 function installZkFmDownloadFrameIfAbsent(){
     if($("#" + downloadIframeId).length === 0) {
         console.log("new zk.fm iframe created");

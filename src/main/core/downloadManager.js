@@ -1,5 +1,4 @@
-const log4js = require('log4js');
-const log = log4js.getLogger();
+const log = require("../additional/logger");
 
 function DownloadManager() {
 

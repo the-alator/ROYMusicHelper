@@ -1,0 +1,31 @@
+{
+  "name": "ROYMusicHelper",
+  "version": "1.0.0",
+  "description": "ROYMusicHelper is an extension for google chrome that provides features of searching and downloading music from external resources by one click.\r Features: \r 1. Download music from shazam in just one button\r 2. No more redirects to page with song in mp3party.net while click to download button. Now the downloading starts immediately.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-js": "browserify src/main/extension/background.js -o src/main/dist/main.js",
+    "watch-js": "watchify src/main/extension/background.js -o src/main/dist/main.js -d -v"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-alator/ROYMusicHelper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/the-alator/ROYMusicHelper/issues"
+  },
+  "homepage": "https://github.com/the-alator/ROYMusicHelper#readme",
+  "devDependencies": {
+    "browserify": "^16.2.3",
+    "watchify": "^3.11.0"
+  },
+  "dependencies": {
+    "chai": "^4.2.0",
+    "log4js": "^3.0.6",
+    "mocha": "^5.2.0",
+    "sinon": "^7.2.0"
+  }
+}

@@ -1,0 +1,1 @@
+console.error("\nD:\\Files\\Web\\workspace\\ROYMusicHelper\\src\\main\\additional\\logger.js:3\ntry {\r\n^\nParseError: Missing catch or finally clause");

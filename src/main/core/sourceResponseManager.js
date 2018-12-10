@@ -1,4 +1,4 @@
-const log4js = require('log4js'); const log = log4js.getLogger();
+const log = require("../additional/logger");
 
 function SourceResponseManager(title, songsSetsManager) {
     const SUCCESSFUL_RESPONSES_TO_START_PROCESSING = 1;

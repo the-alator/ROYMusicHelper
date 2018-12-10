@@ -1,3 +1,5 @@
+const log = require("../additional/logger");
+
 function SourceManager() {
     let supportedSources = [];
 

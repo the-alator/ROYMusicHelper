@@ -23,7 +23,7 @@ describe("Cleaners spec", function () {
    describe("Case cleaner", function () {
        let caseCleaner;
        beforeEach(function () {
-           caseCleaner = new CaseCleaner();
+           caseCleaner = new cleaner.CaseCleaner();
        });
        it('should make string lowercase', function () {
            assert.equal(caseCleaner.doClean("Qq D"), "qq d");
@@ -32,7 +32,7 @@ describe("Cleaners spec", function () {
    describe("OtherSymbols cleaner", function () {
        let otherSymbolsCleaner;
        beforeEach(function () {
-           otherSymbolsCleaner = new OtherSymbolsCleaner();
+           otherSymbolsCleaner = new cleaner.OtherSymbolsCleaner();
        });
        it('should replace double spaces with one space', function () {
            assert.equal(otherSymbolsCleaner.doClean("q  q"), "q q");

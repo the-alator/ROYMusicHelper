@@ -1,4 +1,4 @@
-const log4js = require('log4js'); const log = log4js.getLogger();
+const log = require("../additional/logger");
 
 const LIMIT_OF_SONGS_IN_LIST = 10;
 
