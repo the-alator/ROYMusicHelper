@@ -1,6 +1,6 @@
-const log = require("../additional/logger");
+const log = require("../extension/additional/logger");
 
-function DownloadManager() {
+function Downloader() {
 
     this.process = function (songsList) {
         recurs(songsList, 0);
@@ -46,4 +46,4 @@ function DownloadManager() {
 
 }
 
-module.exports = DownloadManager;
+module.exports = Downloader;

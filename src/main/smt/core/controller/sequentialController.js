@@ -1,4 +1,4 @@
-function AsyncCycle(list, cycleBody, cycleFinal){
+function SequentialController(list, cycleBody, cycleFinal){
     this.list = list;
     this.currentIndex = 0;
     this.cycleBody = cycleBody;

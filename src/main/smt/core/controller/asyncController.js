@@ -1,6 +1,6 @@
-const log = require("../additional/logger");
+const log = require("../extension/additional/logger");
 
-function AsyncSadManager(songSetsManager, textCleaner) {
+function AsyncController(songSetsManager, textCleaner) {
     this.processTitle = function(title, sourceResponseManagerR) {
         log.debug("The title - " + title);
         title = textCleaner.clean(title);
@@ -13,4 +13,4 @@ function AsyncSadManager(songSetsManager, textCleaner) {
     }
 }
 
-module.exports = AsyncSadManager;
+module.exports = AsyncController;

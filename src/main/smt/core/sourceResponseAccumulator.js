@@ -1,6 +1,6 @@
-const log = require("../additional/logger");
+const log = require("../extension/additional/logger");
 
-function SourceResponseManager(title, songsSetsManager) {
+function SourceResponseAccumulator(title, songsSetsManager) {
     const SUCCESSFUL_RESPONSES_TO_START_PROCESSING = 1;
     let responsesCount = 0;
     let successfulResponses = 0;
@@ -32,4 +32,4 @@ function SourceResponseManager(title, songsSetsManager) {
     }
 }
 
-module.exports = SourceResponseManager;
+module.exports = SourceResponseAccumulator;

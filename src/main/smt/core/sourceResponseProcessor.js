@@ -1,8 +1,8 @@
-const log = require("../additional/logger");
+const log = require("../extension/additional/logger");
 
 const LIMIT_OF_SONGS_IN_LIST = 10;
 
-function SongSetsManager(textCleaner, downloadManager) {
+function SourceResponseProcessor(textCleaner, downloadManager) {
 
     this.process = function(title, songsSetsList) {
         log.debug("Start of process");
@@ -61,4 +61,4 @@ function SongSetsManager(textCleaner, downloadManager) {
 
 }
 
-module.exports = SongSetsManager;
+module.exports = SourceResponseProcessor;

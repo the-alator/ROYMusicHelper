@@ -21,9 +21,9 @@
       "/lib/log4js.combined.js",
       "/lib/compare-strings.js",
       "/src/main/dist/main.js",
-//      "/src/SAD/sources/fileSources/zaycev.net.js",
-//      "/src/SAD/sources/fileSources/zk.fm.js",
-//      "/src/SAD/sources/fileSources/godfaithculture.com.js",
+//      "/src/SAD/sources/songSource/zaycev.net.js",
+//      "/src/SAD/sources/songSource/zk.fm.js",
+//      "/src/SAD/sources/songSource/godfaithculture.com.js",
       "/src/main/SAD/cycle.js"],
     "persistent": true
   },

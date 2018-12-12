@@ -9,7 +9,7 @@ $(function () {
 
 function setButtons(){
     logme("buttons set");
-    $("article.shz-partial-track div.details").after("<button  class=\"ROYMusicHelperDownloadButton popup-btn\"><img alt='download' src='" + chrome.runtime.getURL("resources/images/popup/download.png") + "'></button>");
+    $("article.shz-partial-track div.details").after("<button  class=\"ROYMusicHelperDownloadButton extension.popup-btn\"><img alt='download' src='" + chrome.runtime.getURL("resources/images/extension.popup/download.png") + "'></button>");
     //data-shz-beacon="type=btn,providerdesc=overflow-click"
     $(".ROYMusicHelperDownloadButton").click(function (event) {
         console.log("DOWNLOAD BUTTON CLICKED");

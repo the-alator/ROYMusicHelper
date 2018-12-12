@@ -37,7 +37,7 @@ window.zaycevNetSource = {};
                 return;
             }
 
-            let songsCycle = new AsyncCycle(songs, function (song) {
+            let songsCycle = new SequentialController(songs, function (song) {
                 let songPageUrl = zaycevNetSource.baseSongPageUrl + song.href;
                 console.log("song page url - " + songPageUrl);
 

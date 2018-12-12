@@ -1,15 +1,15 @@
 const log = require("../additional/logger");
 
-const SourceResponseManager = require("../core/sourceResponseManager");
-const ParenthesesCleaner = require("../core/textCleaner").ParenthesesCleaner;
-const TextCleaner = require("../core/textCleaner").TextCleaner;
-const OtherSymbolsCleaner = require("../core/textCleaner").OtherSymbolsCleaner;
-const CaseCleaner = require("../core/textCleaner").CaseCleaner;
-const SourceManager = require("../SAD/sourceManager");
+const SourceResponseManager = require("../../smt/core/sourceResponseManager");
+const ParenthesesCleaner = require("../../smt/core/util/textCleaner").ParenthesesCleaner;
+const TextCleaner = require("../../smt/core/util/textCleaner").TextCleaner;
+const OtherSymbolsCleaner = require("../../smt/core/util/textCleaner").OtherSymbolsCleaner;
+const CaseCleaner = require("../../smt/core/util/textCleaner").CaseCleaner;
+const SourceManager = require("../../smt/core/sourceManager");
 
-const DownloadManager = require("../core/DownloadManager");
-const SongSetsManager = require("../core/SongSetsManager");
-const AsyncSadManager = require("../core/AsyncSadManager");
+const DownloadManager = require("../../smt/core/songProcessor/downloadManager");
+const SongSetsManager = require("../../smt/core/songSetsManager");
+const AsyncSadManager = require("../../smt/core/controller/asyncSadManager");
 
 let zkFmDownloadFrame;
 let downloadIframeSrc = "http://zk.fm/?UNIQUEROYMUSICHELPER=E";

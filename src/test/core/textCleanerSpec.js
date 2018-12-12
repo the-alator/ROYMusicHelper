@@ -1,4 +1,4 @@
-const cleaner = require("../../main/core/textCleaner");
+const cleaner = require("../../main/smt/core/util/textCleaner");
 const assert = require("../chai").assert;
 
 describe("Cleaners spec", function () {
