@@ -1,4 +1,4 @@
-const log = require("../extension/additional/logger");
+const log = require("../../extension/additional/logger");
 
 function SourceResponseAccumulator(title, songsSetsManager) {
     const SUCCESSFUL_RESPONSES_TO_START_PROCESSING = 1;

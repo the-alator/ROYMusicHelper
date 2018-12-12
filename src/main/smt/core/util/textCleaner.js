@@ -1,4 +1,4 @@
-const log = require("../extension/additional/logger");
+const log = require("../../../extension/additional/logger");
 
 function TextCleaner(textCleaners) {
 

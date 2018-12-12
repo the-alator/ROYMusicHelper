@@ -1,5 +1,5 @@
-const cleaner = require("../../main/smt/core/util/textCleaner");
-const assert = require("../chai").assert;
+const cleaner = require("../../../main/smt/core/util/textCleaner");
+const assert = require("chai").assert;
 
 describe("Cleaners spec", function () {
    describe("Parentheses cleaner", function () {

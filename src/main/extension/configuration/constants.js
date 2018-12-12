@@ -1,1 +1,1 @@
-const DEBUG_HTML_PAGE = "src/main/extension.popup/debug.html";
+const DEBUG_HTML_PAGE = "src/main/extension/popup/debug.html";

@@ -1,30 +1,30 @@
 const log = require("../additional/logger");
 
-const SourceResponseManager = require("../../smt/core/sourceResponseManager");
+const SourceResponseAccumulator = require("../../smt/core/SourceResponseAccumulator");
 const ParenthesesCleaner = require("../../smt/core/util/textCleaner").ParenthesesCleaner;
 const TextCleaner = require("../../smt/core/util/textCleaner").TextCleaner;
 const OtherSymbolsCleaner = require("../../smt/core/util/textCleaner").OtherSymbolsCleaner;
 const CaseCleaner = require("../../smt/core/util/textCleaner").CaseCleaner;
 const SourceManager = require("../../smt/core/sourceManager");
 
-const DownloadManager = require("../../smt/core/songProcessor/downloadManager");
-const SongSetsManager = require("../../smt/core/songSetsManager");
-const AsyncSadManager = require("../../smt/core/controller/asyncSadManager");
+const SongProcessor = require("../../smt/core/songProcessor/downloader");
+const SourceResponseProcessor = require("../../smt/core/SourceResponseProcessor");
+const Controller = require("../../smt/core/controller/asyncController");
+
+const downloadIframeSrc = "http://zk.fm/?UNIQUEROYMUSICHELPER=E";
+const downloadIframeId = "zkFmDownloadIframe";
 
 let zkFmDownloadFrame;
-let downloadIframeSrc = "http://zk.fm/?UNIQUEROYMUSICHELPER=E";
-let downloadIframeId = "zkFmDownloadIframe";
 
-let searchManager;
-let songSetsManager;
+let controller;
+let sourceResponseProcessor;
 let sourceManager;
-let downloadManager;
+let songProcessor;
 let textCleaner;
 
-
 init();
-installZkFmDownloadFrameIfAbsent();
-log.info("EXTENSION INSTALLED");
+
+log.debug("EXTENSION INSTALLED");
 
 chrome.tabs.create({url: DEBUG_HTML_PAGE});
 
@@ -35,25 +35,26 @@ function init() {
         [new ParenthesesCleaner(), new OtherSymbolsCleaner(), new CaseCleaner()]
     );
 
-    downloadManager = new DownloadManager();
-    songSetsManager = new SongSetsManager(textCleaner, downloadManager);
+    songProcessor = new SongProcessor();
+    sourceResponseProcessor = new SourceResponseProcessor(textCleaner, songProcessor);
 
-    searchManager = new AsyncSadManager(songSetsManager, textCleaner);
+    controller = new Controller(textCleaner, sourceManager);
+
+    installZkFmDownloadFrame();
 }
 
-function installZkFmDownloadFrameIfAbsent(){
+function installZkFmDownloadFrame(){
     if($("#" + downloadIframeId).length === 0) {
-        console.log("new zk.fm iframe created");
         zkFmDownloadFrame = $("<iframe>").attr("src", downloadIframeSrc).attr("id", downloadIframeId).appendTo("body").get(0);
     }
 }
 
 chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
-    console.log("message received!");
+    log.debug("Message: " + JSON.stringify(request));
     switch (request.action){
         case "getSongListByTitle":
-            let sourceResponseManager = new SourceResponseManager(title, songSetsManager);
-            searchManager.processTitle(request.value, sourceResponseManager);
+            let sourceResponseAccumulator = new SourceResponseAccumulator(title, sourceResponseProcessor);
+            controller.processTitle(request.value, sourceResponseAccumulator);
             break;
         case "getDownloadUrlForSong":
             window[request.windowObject].getDownloadUrlForSong(request.value);

@@ -17,33 +17,33 @@
   },
   "background": {
     "scripts": ["/lib/jquery-3.3.1.min.js",
-      "/src/main/configuration/constants.js",
+      "/src/main/extension/configuration/constants.js",
       "/lib/log4js.combined.js",
       "/lib/compare-strings.js",
-      "/src/main/dist/main.js",
 //      "/src/SAD/sources/songSource/zaycev.net.js",
 //      "/src/SAD/sources/songSource/zk.fm.js",
 //      "/src/SAD/sources/songSource/godfaithculture.com.js",
-      "/src/main/SAD/cycle.js"],
+      "/out/main.js"
+      ],
     "persistent": true
   },
   "content_scripts": [
     {
       "run_at": "document_start",
       "matches": ["https://www.shazam.com/*"],
-      "js": ["/lib/jquery-3.3.1.min.js", "/src/main/injects/shazam.js"],
-      "css": ["/src/main/injects/shazam.css"]
+      "js": ["/lib/jquery-3.3.1.min.js", "/src/main/extension/injects/shazam.js"],
+      "css": ["/src/main/extension/injects/shazam.css"]
     },
     {
       "run_at": "document_end",
       "matches": ["http://zk.fm/?UNIQUEROYMUSICHELPER=E"],
-      "js": ["/lib/jquery-3.3.1.min.js", "/src/main/injects/zkFmIframeDownloader.js"],
+      "js": ["/lib/jquery-3.3.1.min.js", "/src/main/extension/injects/zkFmIframeDownloader.js"],
       "all_frames": true
     },
     {
       "run_at": "document_end",
       "matches": ["http://mp3party.net/*"],
-      "js": ["/lib/jquery-3.3.1.min.js", "/src/main/injects/mp3party.net.js"]
+      "js": ["/lib/jquery-3.3.1.min.js", "/src/main/extension/injects/mp3party.net.js"]
     }
   ],
   "web_accessible_resources": ["resources/images/general/*"]

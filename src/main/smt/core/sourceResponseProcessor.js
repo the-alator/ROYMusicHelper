@@ -1,4 +1,4 @@
-const log = require("../extension/additional/logger");
+const log = require("../../extension/additional/logger");
 
 const LIMIT_OF_SONGS_IN_LIST = 10;
 
