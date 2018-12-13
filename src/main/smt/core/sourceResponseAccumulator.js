@@ -1,7 +1,8 @@
 const log = require("../../extension/additional/logger");
 
-function SourceResponseAccumulator(title, songsSetsManager) {
+function SourceResponseAccumulator(title, sourceResponseProcessor, sourceManager, sourceResponseErrorHandler) {
     const SUCCESSFUL_RESPONSES_TO_START_PROCESSING = 1;
+
     let responsesCount = 0;
     let successfulResponses = 0;
     let failResponses = 0;
@@ -22,7 +23,7 @@ function SourceResponseAccumulator(title, songsSetsManager) {
         log.trace("songsList " + JSON.stringify(songsList));
 
         if(successfulResponses >= SUCCESSFUL_RESPONSES_TO_START_PROCESSING) {
-            songsSetsManager.process(title, songsSetsList);
+            sourceResponseProcessor.process(title, songsSetsList);
         }
 
     };

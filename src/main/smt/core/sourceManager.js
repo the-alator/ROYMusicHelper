@@ -12,6 +12,10 @@ function SourceManager() {
         return supportedSources;
     };
 
+    this.getNumberOfSources = function () {
+        return supportedSources.length;
+    }
+
 }
 
 module.exports = SourceManager;

@@ -9,6 +9,7 @@ const SourceManager = require("../../smt/core/sourceManager");
 
 const SongProcessor = require("../../smt/core/songProcessor/downloader");
 const SourceResponseProcessor = require("../../smt/core/SourceResponseProcessor");
+const SourceResponseErrorHandler = require("../../smt/core/SourceResponseErrorHandler");
 const Controller = require("../../smt/core/controller/asyncController");
 
 const downloadIframeSrc = "http://zk.fm/?UNIQUEROYMUSICHELPER=E";
@@ -18,6 +19,7 @@ let zkFmDownloadFrame;
 
 let controller;
 let sourceResponseProcessor;
+let sourceResponseErrorHandler;
 let sourceManager;
 let songProcessor;
 let textCleaner;
@@ -37,6 +39,7 @@ function init() {
 
     songProcessor = new SongProcessor();
     sourceResponseProcessor = new SourceResponseProcessor(textCleaner, songProcessor);
+    sourceResponseErrorHandler = new SourceResponseErrorHandler();
 
     controller = new Controller(textCleaner, sourceManager);
 
@@ -53,7 +56,7 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
     log.debug("Message: " + JSON.stringify(request));
     switch (request.action){
         case "getSongListByTitle":
-            let sourceResponseAccumulator = new SourceResponseAccumulator(title, sourceResponseProcessor);
+            let sourceResponseAccumulator = new SourceResponseAccumulator(title, sourceResponseProcessor, sourceManager, sourceResponseErrorHandler);
             controller.processTitle(request.value, sourceResponseAccumulator);
             break;
         case "getDownloadUrlForSong":
