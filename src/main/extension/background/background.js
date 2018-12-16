@@ -1,6 +1,6 @@
 const log = require("../additional/logger");
 
-const SourceResponseAccumulator = require("../../smt/core/SourceResponseAccumulator");
+const SourceResponseProcessor = require("../../smt/core/SourceResponseAccumulator");
 const ParenthesesCleaner = require("../../smt/core/util/textCleaner").ParenthesesCleaner;
 const TextCleaner = require("../../smt/core/util/textCleaner").TextCleaner;
 const OtherSymbolsCleaner = require("../../smt/core/util/textCleaner").OtherSymbolsCleaner;
@@ -33,12 +33,8 @@ chrome.tabs.create({url: DEBUG_HTML_PAGE});
 function init() {
     sourceManager = new SourceManager();
 
-    textCleaner = new TextCleaner(
-        [new ParenthesesCleaner(), new OtherSymbolsCleaner(), new CaseCleaner()]
-    );
-
     songProcessor = new SongProcessor();
-    sourceResponseProcessor = new SourceResponseProcessor(textCleaner, songProcessor);
+    sourceResponseProcessor = new SourceResponseProcessor();
     sourceResponseErrorHandler = new SourceResponseErrorHandler();
 
     controller = new Controller(textCleaner, sourceManager);
@@ -56,8 +52,8 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
     log.debug("Message: " + JSON.stringify(request));
     switch (request.action){
         case "getSongListByTitle":
-            let sourceResponseAccumulator = new SourceResponseAccumulator(title, sourceResponseProcessor, sourceManager, sourceResponseErrorHandler);
-            controller.processTitle(request.value, sourceResponseAccumulator);
+            let sourceResponseProcessor = new SourceResponseProcessor(title, sourceResponseProcessor, sourceManager, sourceResponseErrorHandler);
+            controller.processTitle(request.value, sourceResponseProcessor);
             break;
         case "getDownloadUrlForSong":
             window[request.windowObject].getDownloadUrlForSong(request.value);
