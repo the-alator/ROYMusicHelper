@@ -9,7 +9,7 @@ function Downloader() {
     function recurs(songsList, index) {
         log.debug("Recurs with index " + index);
         if(index >= songsList.length) {
-            log.debug("List is empty");
+            log.debug("Now list is empty");
             return;
         }
         songsList[index].source.getDownloadUrlForSong(songsList[index]).then(

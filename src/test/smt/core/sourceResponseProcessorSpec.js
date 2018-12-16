@@ -1,6 +1,7 @@
 const SourceResponseProcessor = require("../../../main/smt/core/sourceResponseProcessor");
 const assert = require("chai").assert;
 const sinon = require("sinon");
+const songsListAnalyzer = require("../../../main/smt/core/util/songsListAnalyzer");
 
 describe("SourceResponseAccumulator spec", function () {
     const DUMMY_TITLE = "dummytitle";
@@ -14,14 +15,11 @@ describe("SourceResponseAccumulator spec", function () {
     let sourceResponseErrorHandler;
     let songProcessor;
 
-    const songsListAnalyzer = require("../../../../src/main/smt/core/util/songsListAnalyzer");
-    let getMaxSimilaritySongsIndicesSpy = sinon.spy(songsListAnalyzer, "getMaxSimilaritySongsIndices");
-
     beforeEach(function () {
-        sourceResponseTransformer = {transformList : sinon.stub()};
+        sourceResponseTransformer = {transformList : sinon.stub(), processTransformedSongsLists : sinon.stub().returns([])};
         sourceResponseErrorHandler = {processError : sinon.stub()};
         sourceManager = {getNumberOfSources : sinon.stub().returns(SOURCES_NUMBER)};
-        songProcessor = {process : sinon.stub()};
+        songProcessor = {process : sinon.stub().returns(true)};
 
         sourceResponseProcessor = new SourceResponseProcessor(DUMMY_TITLE, sourceResponseTransformer, sourceManager, sourceResponseErrorHandler, songProcessor);
     });
@@ -31,38 +29,70 @@ describe("SourceResponseAccumulator spec", function () {
             sourceResponseProcessor.fail(SOURCE);
         }
 
-        assert.isTrue(sourceResponseErrorHandler.processError.called)
+        assert.isTrue(sourceResponseErrorHandler.processError.called);
     });
 
-    it("should call downloader if has MAX match in first part", function () {
+    it("should call sourceResponseErrorHandler if all responses are empty ", function () {
+        for(let i = 0; i < SOURCES_NUMBER; i++) {
+            sourceResponseProcessor.success([], SOURCE);
+        }
+
+        assert.isTrue(sourceResponseErrorHandler.processError.called);
+    });
+
+    it("should call downloader if has MAX match", function () {
         const maxSimilaritySong = {similarity: 1};
         let songsList = dummySongsList(25, {5 : 1});
 
-        sourceResponseProcessor.success(songsList, SOURCE);
+        assert.isTrue(sourceResponseProcessor.success(songsList, SOURCE));
 
         assert.isTrue(songProcessor.process.calledWith(maxSimilaritySong));
-        assert.equal(getMaxSimilaritySongsIndicesSpy.callCount, 1);
     });
 
-    it("should call downloader if has MAX match in second part", function () {
+    it("should not process responses after first successful download", function () {
         const maxSimilaritySong = {similarity: 1};
-        let songsList = dummySongsList(25, {15 : 1});
+        let songsList = [maxSimilaritySong];
 
-        sourceResponseProcessor.success(songsList, SOURCE);
+        assert.isTrue(sourceResponseProcessor.success(songsList, SOURCE));
+        assert.isFalse(sourceResponseProcessor.success(songsList, SOURCE));
 
         assert.isTrue(songProcessor.process.calledWith(maxSimilaritySong));
-        assert.equal(getMaxSimilaritySongsIndicesSpy.callCount, 2);
-    });
-
-    it("should not process responses after processingDone", function () {
-
     });
 
     it("should delete unsuccessful download urls with MAX similarity", function () {
+        const maxSimilaritySong = {similarity: 1};
+        let songsList = dummySongsList(5, {2 : 1, 4: 1});
+
+        songProcessor.process.onCall(0).returns(false);
+        songProcessor.process.onCall(1).returns(true);
+
+        assert.equal(songsList.length, 5);
+        assert.equal(songsListAnalyzer.getMaxSimilaritySongsIndices(songsList).length, 2);
+
+        assert.isTrue(sourceResponseProcessor.success(songsList, SOURCE));
+
+        assert.isTrue(songProcessor.process.calledWith(maxSimilaritySong));
+        assert.equal(songsList.length, 4);
+        assert.equal(songsListAnalyzer.getMaxSimilaritySongsIndices(songsList).length, 1);
+    });
+
+    it("should wait all responses and choose best match", function () {
+        let maxSimilaritySong = {similarity : 0.9};
+
+        sourceResponseProcessor.success([maxSimilaritySong], SOURCE);
+        sourceResponseProcessor.success([{similarity : 0.1}], {similarity : 0.14}, SOURCE);
+        sourceResponseProcessor.success([{similarity : 0.8}], SOURCE);
+        sourceResponseProcessor.success([{similarity : 0.4}], SOURCE);
+
+        assert.isTrue(sourceResponseTransformer.processTransformedSongsLists.called);
 
     });
 
-    it("should empty lists", function () {
+    it("should", function () {
+
+    });
+
+    it("should", function () {
 
     });
 

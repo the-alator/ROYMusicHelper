@@ -11,14 +11,15 @@ function SourceResponseTransformer() {
 
         this.cleanAllSongs(songsList);
         this.compareAllSongsToTitle(title, songsList);
-        this.sort(songsList);
 
         log.debug("transforming has ended");
         log.trace("filtered and sorted songs: " + JSON.stringify(songsList));
     };
 
-    this.processTransformedSongLists = function(songLists) {
-
+    this.processTransformedSongsLists = function(songsLists) {
+        let songsList = flattenSongsLists(songsLists);
+        this.sort(songsList);
+        return songsList;
     };
 
     this.cleanAllSongs = function(songsList) {
@@ -38,30 +39,21 @@ function SourceResponseTransformer() {
     this.sort = function(songsList) {
         songsList.sort(function (a, b) {
             if(a.similarity > b.similarity) {
-                return 1;
-            } else {
                 return -1;
+            } else {
+                return 1;
             }
         });
 
     };
 
-    this.getSortedSongsList = function(songsSetsList) {
-        let songsList = [];
-        songsSetsList.forEach(function (songSet) {
-            songsList = songsList.concat(songSet);
+    function flattenSongsLists(songsLists) {
+        let sortedSongsList = [];
+        songsLists.forEach(function (songsList) {
+            sortedSongsList = sortedSongsList.concat(songsList);
         });
-        songsList.sort(function (a, b) {
-           if(a.similarity > b.similarity) {
-               return 1;
-           } else {
-               return -1;
-           }
-        });
-
-        return songsList;
-    };
-
+        return sortedSongsList;
+    }
 }
 
 module.exports = SourceResponseTransformer;

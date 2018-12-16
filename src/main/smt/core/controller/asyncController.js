@@ -1,9 +1,9 @@
 const log = require("../../../extension/additional/logger");
 
-function AsyncController(textCleaner, sourceManager) {
+function AsyncController(clean, sourceManager) {
     this.processTitle = function(title, sourceResponseAccumulator) {
         log.debug("The title - " + title);
-        title = textCleaner.clean(title);
+        title = clean(title);
         log.debug("The cleaned title - " + title);
 
         sourceManager.getSupportedSources().forEach(function (source) {

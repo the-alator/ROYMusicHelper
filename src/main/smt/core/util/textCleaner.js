@@ -3,9 +3,14 @@ const log = require("../../../extension/additional/logger");
 let textCleaners =  [new ParenthesesCleaner(), new OtherSymbolsCleaner(), new CaseCleaner()];
 
 function clean(text) {
+    let cleanedText = text;
+
     textCleaners.forEach(cleaner => {
-        text = cleaner.doClean(text);
+        cleanedText = cleaner.doClean(cleanedText);
     });
+
+    log.trace("text before parenclean: " + text + " text after clean: " + cleanedText);
+
     return text;
 }
 

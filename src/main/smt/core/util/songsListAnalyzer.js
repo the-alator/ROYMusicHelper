@@ -1,29 +1,3 @@
-const DEFAULT_SONGS_PART_SIZE = 10;
-
-
-function getNumberOfDefaultParts(songsList) {
-    return getNumberOfParts(songsList, DEFAULT_SONGS_PART_SIZE);
-}
-
-function getNumberOfParts(songsList, partSize) {
-    return Math.ceil(songsList.length / partSize);
-}
-
-function splitListToDefaultParts(songsList) {
-    return splitListToParts(songsList, DEFAULT_SONGS_PART_SIZE);
-}
-
-function splitListToParts(songsList, partSize) {
-    let numberOfParts = getNumberOfParts(songsList, partSize);
-    let partsList = [];
-
-    for(let i = 0; i < numberOfParts; i++) {
-        partsList.push(songsList.slice(i * partSize, (i + 1) * partSize));
-    }
-
-    return partsList;
-}
-
 function getMaxSimilaritySongsIndices(songsList) {
     let maxSimilaritySongsIndices = [];
 
@@ -36,7 +10,17 @@ function getMaxSimilaritySongsIndices(songsList) {
     return maxSimilaritySongsIndices;
 }
 
-module.exports.splitListToDefaultParts = splitListToDefaultParts;
-module.exports.getNumberOfDefaultParts = getNumberOfDefaultParts;
-module.exports.DEFAULT_SONGS_PART_SIZE = DEFAULT_SONGS_PART_SIZE;
+function getSublistWithSimilarityMoreThen(minSimilarity, songsList){
+    let index = 0;
+
+    for(; index < songsList.length; index++) {
+        if(songsList[index].similarity < minSimilarity) {
+            break;
+        }
+    }
+
+    return songsList.slice(0, index);
+}
+
 module.exports.getMaxSimilaritySongsIndices = getMaxSimilaritySongsIndices;
+module.exports.getSublistWithSimilarityMoreThen = getSublistWithSimilarityMoreThen;

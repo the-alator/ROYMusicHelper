@@ -51,4 +51,27 @@ describe("SourceResponseTransformer spec", function () {
         });
     });
 
+    describe("sort() spec", function () {
+        it("should sort in descending order by similarity", function () {
+            const unsortedSongsList = [
+               {similarity : 0.5},
+               {similarity : 0.1},
+               {similarity : 0.8},
+            ];
+
+            const sortedSongsList = [
+                {similarity : 0.8},
+                {similarity : 0.5},
+                {similarity : 0.1},
+            ];
+
+            sourceResponseTransformer.sort(unsortedSongsList);
+
+            assert.equal(unsortedSongsList[0].similarity, sortedSongsList[0].similarity);
+            assert.equal(unsortedSongsList[1].similarity, sortedSongsList[1].similarity);
+            assert.equal(unsortedSongsList[2].similarity, sortedSongsList[2].similarity);
+
+        });
+    });
+
 });

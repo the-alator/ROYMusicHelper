@@ -2,12 +2,11 @@ const log = require("../../extension/additional/logger");
 const songsListAnalyzer = require("./util/songsListAnalyzer");
 
 function SourceResponseProcessor(title, sourceResponseTransformer, sourceManager, sourceResponseErrorHandler, songProcessor) {
-    const SUCCESSFUL_RESPONSES_TO_START_PROCESSING = 1;
-
+    const MIN_SIMILARITY = 0.5;
     let responsesCount = 0;
     let successfulResponses = 0;
     let failResponses = 0;
-    let songsSetsList = [];
+    let songsLists = [];
 
     let processingDone = false;
 
@@ -15,20 +14,15 @@ function SourceResponseProcessor(title, sourceResponseTransformer, sourceManager
         response();
         failResponses++;
         log.debug("Source " + source.name + " responded fail");
-
-        if(sourceManager.getNumberOfSources() === failResponses) {
-            sourceResponseErrorHandler.processError();
-        }
     };
 
     this.success = function (songsList, source) {
-        response();
+        if(processingDone) {
+            return false;
+        }
         successfulResponses++;
 
-        let songListParts = songsListAnalyzer.splitListToDefaultParts(songsList);
-
         sourceResponseTransformer.transformList(title, songsList);
-
 
         let maxSimilaritySongsIndices = songsListAnalyzer.getMaxSimilaritySongsIndices(songsList);
         for(let i = 0; i < maxSimilaritySongsIndices.length; i++) {
@@ -40,20 +34,18 @@ function SourceResponseProcessor(title, sourceResponseTransformer, sourceManager
             }
         }
 
-        songsSetsList.push(songsList);
+        songsLists.push(songsList);
 
         log.debug("Source " + source.name + " responded success");
         log.trace("songsList " + JSON.stringify(songsList));
 
+        response();
 
-        // if(successfulResponses >= SUCCESSFUL_RESPONSES_TO_START_PROCESSING) {
-        //     sourceResponseProcessor.transformList(title, songsSetsList);
-        // }
-
+        return true;
     };
-    
-    function processSongsListParts(songListPart) {
 
+    function isLastSourceResponse() {
+        return sourceManager.getNumberOfSources() === responsesCount;
     }
 
     function response(source){
@@ -61,6 +53,24 @@ function SourceResponseProcessor(title, sourceResponseTransformer, sourceManager
             throw new Error("Too many responses");
         }
         responsesCount++;
+
+        if(!processingDone && isLastSourceResponse()) {
+            if(successfulResponses === 0) {
+                sourceResponseErrorHandler.processError();
+                return;
+            }
+            let sortedSongsList = sourceResponseTransformer.processTransformedSongsLists(songsLists);
+            if(sortedSongsList.length === 0) {
+                sourceResponseErrorHandler.processError();
+                return;
+            }
+
+            log.trace("all sorted songs: " + JSON.stringify(sortedSongsList));
+
+            let listForDownloading = songsListAnalyzer.getSublistWithSimilarityMoreThen(MIN_SIMILARITY, sortedSongsList);
+
+            songProcessor.process(listForDownloading);
+        }
     }
 }
 
