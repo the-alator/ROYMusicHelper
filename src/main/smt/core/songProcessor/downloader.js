@@ -7,7 +7,7 @@ function Downloader() {
     };
 
     function recurs(songsList, index) {
-        log.debug("Recurs with index " + index);
+        log.debug("Recursive downloading. Current index: " + index);
         if(index >= songsList.length) {
             log.debug("Now list is empty");
             return;

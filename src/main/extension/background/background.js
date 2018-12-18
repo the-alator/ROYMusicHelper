@@ -52,7 +52,8 @@ function installZkFmDownloadFrame(){
 }
 
 chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
-    log.debug("Message: " + JSON.stringify(request));
+    log.debug("\n\n\n");
+    log.debug("Message received: " + JSON.stringify(request));
     switch (request.action){
         case "getSongListByTitle":
             let sourceResponseProcessor = new SourceResponseProcessor(request.value, sourceResponseTransformer, sourceManager, sourceResponseErrorHandler, downloader);
@@ -63,5 +64,3 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
             break;
     }
 });
-
-module.exports.log = log;

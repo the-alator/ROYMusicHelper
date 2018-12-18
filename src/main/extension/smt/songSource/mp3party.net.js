@@ -9,23 +9,24 @@ function Mp3partyNetSource() {
     this.requestMethod = "GET";
 
     this.getSongListByTitle = function(title, responseManager){
-        log.debug("Source mp3party.net became fetching the list of songs");
+        log.debug("Source mp3party.net getSongListByTitle with title " + title);
         $.get(mp3partyNetSource.baseSearchUrl + encodeURIComponent(title))
-            .done(function (data) {
-                let songs = [];
-                $(data).find(".song-item a").each(function () {
-                    songs.push({
-                        source: mp3partyNetSource,
-                        pageUrl: $(this).attr("href"),
-                        title: $(this).text()
-                    });
+        .done(function (data) {
+            let songs = [];
+            $(data).find(".song-item a").each(function () {
+                songs.push({
+                    source: mp3partyNetSource,
+                    pageUrl: $(this).attr("href"),
+                    title: $(this).text()
                 });
-                log.debug("Source mp3party.net found " + songs.length + " songs");
-                responseManager.success(songs, mp3partyNetSource);
-            })
-            .fail(function () {
-                responseManager.fail(mp3partyNetSource);
             });
+            log.debug("Source mp3party.net found " + songs.length + " songs");
+            responseManager.success(songs, mp3partyNetSource);
+        })
+        .fail(function () {
+            log.error("Source mp3party.net failed");
+            responseManager.fail(mp3partyNetSource);
+        });
     };
 
     this.getDownloadUrlForSong = function(song){
