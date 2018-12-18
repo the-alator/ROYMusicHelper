@@ -35,16 +35,17 @@ function Mp3partyNetSource() {
             $.get(mp3partyNetSource.baseSongPageUrl + song.pageUrl)
                 .done(function (data) {
                     let urlElement = $(data).find(".download a");
-                    if(urlElement.size === 0) {
-                        log.debug("Source mp3party.net did not found the download url - " + song);
+                    if(urlElement.size === 0 || !urlElement.attr("href")) {
+                        log.debug("Source mp3party.net did not find the download url - " + song);
                         reject(null);
+                        return;
                     }
                     log.debug("Source mp3party.net found the download url - " + urlElement.attr("href"));
 
                     resolve(urlElement.attr("href"));
                 })
                 .fail(function () {
-                    log.debug("Source mp3party.net did not found the download url - " + song);
+                    log.debug("Source mp3party.net did not find the download url - " + song);
                     reject(null);
                 });
         });
