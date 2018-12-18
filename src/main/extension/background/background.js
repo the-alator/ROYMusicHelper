@@ -1,14 +1,15 @@
 const log = require("../additional/logger");
 
-const SourceResponseAccumulator = require("../../smt/core/SourceResponseAccumulator");
+const SourceResponseProcessor = require("../../smt/core/sourceResponseProcessor");
 const ParenthesesCleaner = require("../../smt/core/util/textCleaner").ParenthesesCleaner;
-const TextCleaner = require("../../smt/core/util/textCleaner").TextCleaner;
+const clean = require("../../smt/core/util/textCleaner").clean;
 const OtherSymbolsCleaner = require("../../smt/core/util/textCleaner").OtherSymbolsCleaner;
 const CaseCleaner = require("../../smt/core/util/textCleaner").CaseCleaner;
 const SourceManager = require("../../smt/core/sourceManager");
+const Downloader = require("../../smt/core/songProcessor/downloader");
 
 const SongProcessor = require("../../smt/core/songProcessor/downloader");
-const SourceResponseProcessor = require("../../smt/core/SourceResponseProcessor");
+const SourceResponseTransformer = require("../../smt/core/sourceResponseTransformer");
 const SourceResponseErrorHandler = require("../../smt/core/SourceResponseErrorHandler");
 const Controller = require("../../smt/core/controller/asyncController");
 
@@ -18,11 +19,11 @@ const downloadIframeId = "zkFmDownloadIframe";
 let zkFmDownloadFrame;
 
 let controller;
-let sourceResponseProcessor;
+let sourceResponseTransformer;
 let sourceResponseErrorHandler;
 let sourceManager;
 let songProcessor;
-let textCleaner;
+let downloader;
 
 init();
 
@@ -33,15 +34,13 @@ chrome.tabs.create({url: DEBUG_HTML_PAGE});
 function init() {
     sourceManager = new SourceManager();
 
-    textCleaner = new TextCleaner(
-        [new ParenthesesCleaner(), new OtherSymbolsCleaner(), new CaseCleaner()]
-    );
-
     songProcessor = new SongProcessor();
-    sourceResponseProcessor = new SourceResponseProcessor(textCleaner, songProcessor);
+    sourceResponseTransformer = new SourceResponseTransformer();
     sourceResponseErrorHandler = new SourceResponseErrorHandler();
 
-    controller = new Controller(textCleaner, sourceManager);
+    controller = new Controller(clean, sourceManager);
+
+    downloader = new Downloader();
 
     installZkFmDownloadFrame();
 }
@@ -56,8 +55,8 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
     log.debug("Message: " + JSON.stringify(request));
     switch (request.action){
         case "getSongListByTitle":
-            let sourceResponseAccumulator = new SourceResponseAccumulator(title, sourceResponseProcessor, sourceManager, sourceResponseErrorHandler);
-            controller.processTitle(request.value, sourceResponseAccumulator);
+            let sourceResponseProcessor = new SourceResponseProcessor(request.value, sourceResponseTransformer, sourceManager, sourceResponseErrorHandler, downloader);
+            controller.processTitle(request.value, sourceResponseProcessor);
             break;
         case "getDownloadUrlForSong":
             window[request.windowObject].getDownloadUrlForSong(request.value);

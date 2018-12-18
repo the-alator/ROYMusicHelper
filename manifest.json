@@ -19,7 +19,6 @@
     "scripts": ["/lib/jquery-3.3.1.min.js",
       "/src/main/extension/configuration/constants.js",
       "/lib/log4js.combined.js",
-      "/lib/compare-strings.js",
 //      "/src/SAD/sources/songSource/zaycev.net.js",
 //      "/src/SAD/sources/songSource/zk.fm.js",
 //      "/src/SAD/sources/songSource/godfaithculture.com.js",

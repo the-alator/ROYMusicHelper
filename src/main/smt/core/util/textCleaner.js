@@ -1,13 +1,17 @@
 const log = require("../../../extension/additional/logger");
 
-function TextCleaner(textCleaners) {
+let textCleaners =  [new ParenthesesCleaner(), new OtherSymbolsCleaner(), new CaseCleaner()];
 
-    this.clean = function(text) {
-        textCleaners.forEach(cleaner => {
-            text = cleaner.doClean(text);
-        });
-        return text;
-    }
+function clean(text) {
+    let cleanedText = text;
+
+    textCleaners.forEach(cleaner => {
+        cleanedText = cleaner.doClean(cleanedText);
+    });
+
+    log.trace("text before parenclean: " + text + " text after clean: " + cleanedText);
+
+    return text;
 }
 
 function ParenthesesCleaner() {
@@ -33,6 +37,6 @@ function CaseCleaner() {
 }
 
 module.exports.ParenthesesCleaner = ParenthesesCleaner;
-module.exports.TextCleaner = TextCleaner;
 module.exports.OtherSymbolsCleaner = OtherSymbolsCleaner;
 module.exports.CaseCleaner = CaseCleaner;
+module.exports.clean = clean;

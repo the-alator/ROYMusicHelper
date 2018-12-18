@@ -1,64 +1,77 @@
 const log = require("../../extension/additional/logger");
+const songsListAnalyzer = require("./util/songsListAnalyzer");
 
-const LIMIT_OF_SONGS_IN_LIST = 10;
+function SourceResponseProcessor(title, sourceResponseTransformer, sourceManager, sourceResponseErrorHandler, songProcessor) {
+    const MIN_SIMILARITY = 0.5;
+    let responsesCount = 0;
+    let successfulResponses = 0;
+    let failResponses = 0;
+    let songsLists = [];
 
-function SourceResponseProcessor(textCleaner, downloadManager) {
+    let processingDone = false;
 
-    this.process = function(title, songsSetsList) {
-        log.debug("Start of process");
-        log.trace("songsSetsList: " + JSON.stringify(songsSetsList));
-
-        this.reduceAmountOfSongs(songsSetsList);
-        this.cleanAllSongs(songsSetsList);
-        this.compareAllSongsToTitle(title, songsSetsList);
-        let songsList = this.getSortedSongsList(songsSetsList);
-
-        log.debug("processing has ended");
-        log.trace("filtered and sorted songs: " + JSON.stringify(songsList));
-
-        downloadManager.process(songsList);
+    this.fail = function (source) {
+        response();
+        failResponses++;
+        log.debug("Source " + source.name + " responded fail");
     };
 
-    this.reduceAmountOfSongs = function(songsSetsList) {
-        for(let i = 0; i < songsSetsList.length; i++) {
-            songsSetsList[i] = songsSetsList[i].slice(0, LIMIT_OF_SONGS_IN_LIST);
+    this.success = function (songsList, source) {
+        if(processingDone) {
+            return false;
         }
+        successfulResponses++;
+
+        sourceResponseTransformer.transformList(title, songsList);
+
+        let maxSimilaritySongsIndices = songsListAnalyzer.getMaxSimilaritySongsIndices(songsList);
+        for(let i = 0; i < maxSimilaritySongsIndices.length; i++) {
+            if(songProcessor.process(songsList[maxSimilaritySongsIndices[i]])) {
+                processingDone = true;
+                break;
+            } else {
+                songsList.splice(maxSimilaritySongsIndices[i], 1);
+            }
+        }
+
+        songsLists.push(songsList);
+
+        log.debug("Source " + source.name + " responded success");
+        log.trace("songsList " + JSON.stringify(songsList));
+
+        response();
+
+        return true;
     };
 
-    this.cleanAllSongs = function(songsSetsList) {
-        songsSetsList.forEach(function (songSet) {
-            songSet.forEach(function (song) {
-                song.title = textCleaner.clean(song.title);
-            })
-        })
-    };
+    function isLastSourceResponse() {
+        return sourceManager.getNumberOfSources() === responsesCount;
+    }
 
-    this.compareAllSongsToTitle = function(title, songsSetsList) {
-        log.trace("compareAllSongsToTitle title - " + title);
-        songsSetsList.forEach(function (songSet) {
-            songSet.forEach(function (song) {
-                log.trace("compareAllSongsToTitle song title - " + song.title);
-                song.similarity = compareTwoStrings(song.title, title);
-            })
-        })
-    };
+    function response(source){
+        if(responsesCount >= sourceManager.getNumberOfSources()) {
+            throw new Error("Too many responses");
+        }
+        responsesCount++;
 
-    this.getSortedSongsList = function(songsSetsList) {
-        let songsList = [];
-        songsSetsList.forEach(function (songSet) {
-            songsList = songsList.concat(songSet);
-        });
-        songsList.sort(function (a, b) {
-           if(a.similarity > b.similarity) {
-               return 1;
-           } else {
-               return -1;
-           }
-        });
+        if(!processingDone && isLastSourceResponse()) {
+            if(successfulResponses === 0) {
+                sourceResponseErrorHandler.processError();
+                return;
+            }
+            let sortedSongsList = sourceResponseTransformer.processTransformedSongsLists(songsLists);
+            if(sortedSongsList.length === 0) {
+                sourceResponseErrorHandler.processError();
+                return;
+            }
 
-        return songsList;
-    };
+            log.trace("all sorted songs: " + JSON.stringify(sortedSongsList));
 
+            let listForDownloading = songsListAnalyzer.getSublistWithSimilarityMoreThen(MIN_SIMILARITY, sortedSongsList);
+
+            songProcessor.process(listForDownloading);
+        }
+    }
 }
 
 module.exports = SourceResponseProcessor;
