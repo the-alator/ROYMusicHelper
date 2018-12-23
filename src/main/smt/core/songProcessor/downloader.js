@@ -20,7 +20,8 @@ function Downloader() {
                 if(!downloadResult) {
                     recurs(songsList, index + 1);
                 }
-            }, () => recurs(songsList, index + 1)
+            },
+            () => recurs(songsList, index + 1)
         );
     }
 
