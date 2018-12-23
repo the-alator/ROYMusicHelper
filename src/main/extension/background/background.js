@@ -30,6 +30,7 @@ init();
 log.debug("EXTENSION INSTALLED");
 
 chrome.tabs.create({url: DEBUG_HTML_PAGE});
+chrome.tabs.create({url: SOURCES_SPEC_HTML_PAGE});
 
 function init() {
     sourceManager = new SourceManager();

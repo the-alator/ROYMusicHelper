@@ -1,49 +1,50 @@
-window.zkFmSource = {};
-{
-    zkFmSource.name = "zk.fm";
-    zkFmSource.baseSearchUrl = "http://zk.fm/mp3/search?keywords=";
-    zkFmSource.baseDownloadUrl = "http://zk.fm";
-    zkFmSource.requestMethod = "GET";
+const log = require("../../additional/logger");
+const SongSource = require("./songSource");
 
-    zkFmSource.processTitle = function(title, cycle){
-        console.log("In process title zk.fm");
-        this.processSearchPage(title, cycle);
+function ZkFmSource() {
+    SongSource.call(this);
+
+    const zkFmSource = this;
+
+    this.name = "zk.fm";
+    this.baseSearchUrl = "http://zk.fm/mp3/search?keywords=";
+    this.baseSongPageUrl = "http://zk.fm";
+
+    this.getSongsList = function (data) {
+        let songs = [];
+        $(data).find(".song.song-xl").each(function () {
+            let songContentElement = $(this).children(".song-content");
+
+            let title = songContentElement.find(".song-artist span").text() + " " +
+                songContentElement.find(".song-name span").text();
+
+            songs.push({
+                source: zkFmSource,
+                pageUrl: zkFmSource.baseSongPageUrl + $(this).find(".song-download.btn4.download").attr("data-url"),
+                title: title
+            });
+        });
+
+        return songs;
     };
-    zkFmSource.processSearchPage = function(title, cycle){
-        let xhr = new XMLHttpRequest();
-        let url = zkFmSource.baseSearchUrl + encodeURIComponent(title);
-        xhr.responseType = "document";
-        xhr.open(zkFmSource.requestMethod, url, true);
 
-        installZkFmDownloadFrameIfAbsent();
+    this.getDownloadUrlForSong = function(song){
+        log.debug(`Source ${zkFmSource.name} became fetching the download url`);
 
-        xhr.onload = function() {
-            console.log("XHR onload zk.fm searchPage start");
-            let song = xhr.response.querySelector("#container .songs-list .song.song-xl .song-menu .song-download.btn4.download");
-
-            if(song == undefined){
-                console.log("song undefined");
-                cycle.next();
+        return new Promise(function(resolve, reject) {
+            let downloadUrl = zkFmSource.baseSongPageUrl + song.pageUrl;
+            if(!downloadUrl) {
+                log.debug(`Source ${zkFmSource.name} did not find the download url - ` + song);
+                reject(null);
                 return;
             }
+            log.debug(`Source ${zkFmSource.name} found the download url - ` + downloadUrl);
 
-            let url = zkFmSource.baseDownloadUrl + song.getAttribute("data-url");
+            resolve(downloadUrl);
+        });
 
-            zkFmDownloadFrame.contentWindow.postMessage(url, "*");
-        };
 
-        xhr.onerror = function() {
-            console.log("[ERROR] - XHR searchPage");
-            cycle.next();
-        };
-
-        xhr.send();
     };
-
-    zkFmSource.processDownload = function(url){
-
-    }
-
-    registerSource(zkFmSource);
 }
 
+module.exports = ZkFmSource;
