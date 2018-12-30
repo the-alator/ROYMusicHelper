@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-js": "browserify src/main/extension/background/background.js -o out/main.js",
-    "build-songSources-js": "browserify src/test/extension/smt/songSource/root.js -o out/songSources.js",
+    "build-test-js": "browserify src/test/extension/smt/songSource/root.js -o out/songSources.js",
     "watch-js": "watchify src/main/extension/background/background.js -o out/main.js -d -v"
   },
   "repository": {
