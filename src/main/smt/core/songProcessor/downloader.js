@@ -2,28 +2,27 @@ const log = require("../../../extension/additional/logger");
 
 function Downloader() {
 
-    this.process = function (songsList) {
-        recurs(songsList, 0);
+    this.processSongsList = async function (songsList) {
+        for (const song of songsList) {
+            if(await this.processSong(song)) {
+                break;
+            }
+        }
     };
 
-    function recurs(songsList, index) {
-        log.debug("Recurs with index " + index);
-        if(index >= songsList.length) {
-            log.debug("Now list is empty");
-            return;
-        }
-        songsList[index].source.getDownloadUrlForSong(songsList[index]).then(
+    this.processSong = async function (song) {
+        log.trace("Start of processing song " + JSON.stringify(song));
+        song.source.getDownloadUrlForSong(song).then(
             function(url) {
+                log.trace("Url obtained - " + url);
                 let downloadResult = downloadFile(url);
                 log.debug("downloadResult " + downloadResult);
 
-                if(!downloadResult) {
-                    recurs(songsList, index + 1);
-                }
-            },
-            () => recurs(songsList, index + 1)
-        );
-    }
+                return downloadResult;
+            }
+        ).catch(() => false);
+    };
+
 
     function downloadFile(url) {
         console.log("downloadUrl - " + url);

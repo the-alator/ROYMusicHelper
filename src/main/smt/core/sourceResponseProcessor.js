@@ -16,7 +16,8 @@ function SourceResponseProcessor(title, sourceResponseTransformer, sourceManager
         log.debug("Source " + source.name + " responded fail");
     };
 
-    this.success = function (songsList, source) {
+    this.success = async function (songsList, source) {
+        log.debug("Source " + source.name + " responded success");
         if(processingDone) {
             return false;
         }
@@ -25,18 +26,19 @@ function SourceResponseProcessor(title, sourceResponseTransformer, sourceManager
         sourceResponseTransformer.transformList(title, songsList);
 
         let maxSimilaritySongsIndices = songsListAnalyzer.getMaxSimilaritySongsIndices(songsList);
-        for(let i = 0; i < maxSimilaritySongsIndices.length; i++) {
-            if(songProcessor.process(songsList[maxSimilaritySongsIndices[i]])) {
+        for (const index of maxSimilaritySongsIndices) {
+            if(await songProcessor.processSong(songsList[maxSimilaritySongsIndices[index]])) {
+                log.debug("Song is OK, processing done");
                 processingDone = true;
                 break;
             } else {
-                songsList.splice(maxSimilaritySongsIndices[i], 1);
+                songsList.splice(maxSimilaritySongsIndices[index], 1);
+                log.debug("Song is not OK, deleting from list");
             }
         }
 
         songsLists.push(songsList);
 
-        log.debug("Source " + source.name + " responded success");
         log.trace("songsList " + JSON.stringify(songsList));
 
         response();
@@ -69,7 +71,7 @@ function SourceResponseProcessor(title, sourceResponseTransformer, sourceManager
 
             let listForDownloading = songsListAnalyzer.getSublistWithSimilarityMoreThen(MIN_SIMILARITY, sortedSongsList);
 
-            songProcessor.process(listForDownloading);
+            songProcessor.processSongsList(listForDownloading);
         }
     }
 }

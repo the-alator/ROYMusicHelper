@@ -11,7 +11,7 @@ function clean(text) {
 
     log.trace("text before parenclean: " + text + " text after clean: " + cleanedText);
 
-    return text;
+    return cleanedText;
 }
 
 function ParenthesesCleaner() {
