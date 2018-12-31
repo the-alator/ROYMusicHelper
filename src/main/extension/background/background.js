@@ -16,8 +16,6 @@ const Controller = require("../../smt/core/controller/asyncController");
 const downloadIframeSrc = "http://zk.fm/?UNIQUEROYMUSICHELPER=E";
 const downloadIframeId = "zkFmDownloadIframe";
 
-let zkFmDownloadFrame;
-
 let controller;
 let sourceResponseTransformer;
 let sourceResponseErrorHandler;
@@ -43,13 +41,6 @@ function init() {
 
     downloader = new Downloader();
 
-    installZkFmDownloadFrame();
-}
-
-function installZkFmDownloadFrame(){
-    if($("#" + downloadIframeId).length === 0) {
-        zkFmDownloadFrame = $("<iframe>").attr("src", downloadIframeSrc).attr("id", downloadIframeId).appendTo("body").get(0);
-    }
 }
 
 chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
