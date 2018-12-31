@@ -55,8 +55,13 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
     log.debug("Message: " + JSON.stringify(request));
     switch (request.action){
         case "getSongListByTitle":
-            let sourceResponseProcessor = new SourceResponseProcessor(request.value, sourceResponseTransformer, sourceManager, sourceResponseErrorHandler, downloader);
-            controller.processTitle(request.value, sourceResponseProcessor);
+            let title = request.value;
+            log.debug("The title - " + title);
+            title = clean(title);
+            log.debug("The cleaned title - " + title);
+
+            let sourceResponseProcessor = new SourceResponseProcessor(title, sourceResponseTransformer, sourceManager, sourceResponseErrorHandler, downloader);
+            controller.processTitle(title, sourceResponseProcessor);
             break;
         case "getDownloadUrlForSong":
             window[request.windowObject].getDownloadUrlForSong(request.value);

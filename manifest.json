@@ -47,7 +47,8 @@
     {
       "run_at": "document_end",
       "matches": ["https://www.youtube.com/watch*"],
-      "js": ["/lib/jquery-3.3.1.min.js", "/src/main/extension/injects/youtube.com.js"]
+      "js": ["/lib/jquery-3.3.1.min.js", "/src/main/extension/injects/youtube.com.js"],
+      "css": ["/src/main/extension/injects/youtube.com.css"]
     }
   ],
   "web_accessible_resources": ["resources/images/general/*"]
