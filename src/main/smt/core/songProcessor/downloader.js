@@ -19,10 +19,10 @@ function Downloader() {
                 log.debug("downloadResult " + downloadResult);
 
                 return downloadResult;
-
             }
         ).catch(() => false);
     };
+
 
     function downloadFile(url) {
         console.log("downloadUrl - " + url);

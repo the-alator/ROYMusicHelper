@@ -13,15 +13,12 @@
       "48": "/resources/images/general/music-48.png"
     },
     "default_title": "ROYMusicHelper",
-    "default_popup": "src/main/general/popup.html"
+    "default_popup": "src/main/extension/popup/popup.html"
   },
   "background": {
     "scripts": ["/lib/jquery-3.3.1.min.js",
       "/src/main/extension/configuration/constants.js",
       "/lib/log4js.combined.js",
-//      "/src/SAD/sources/songSource/zaycev.net.js",
-//      "/src/SAD/sources/songSource/zk.fm.js",
-//      "/src/SAD/sources/songSource/godfaithculture.com.js",
       "/out/main.js"
       ],
     "persistent": true
@@ -51,5 +48,5 @@
       "css": ["/src/main/extension/injects/youtube.com.css"]
     }
   ],
-  "web_accessible_resources": ["resources/images/general/*"]
+  "web_accessible_resources": ["resources/images/general/*", "out/sourcesSpec.html"]
 }
