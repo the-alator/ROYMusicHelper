@@ -10,41 +10,58 @@ function SourceResponseProcessor(title, sourceResponseTransformer, sourceManager
 
     let processingDone = false;
 
+    let responsePromise = Promise.resolve();
+
     this.fail = function (source) {
         response();
         failResponses++;
         log.debug("Source " + source.name + " responded fail");
     };
 
-    this.success = async function (songsList, source) {
-        log.debug("Source " + source.name + " responded success");
-        if(processingDone) {
-            return false;
-        }
-        successfulResponses++;
-
-        sourceResponseTransformer.transformList(title, songsList);
-
-        let maxSimilaritySongsIndices = songsListAnalyzer.getMaxSimilaritySongsIndices(songsList);
-        for (const index of maxSimilaritySongsIndices) {
-            if(await songProcessor.processSong(songsList[maxSimilaritySongsIndices[index]])) {
-                log.debug("Song is OK, processing done");
-                processingDone = true;
-                break;
-            } else {
-                songsList.splice(maxSimilaritySongsIndices[index], 1);
-                log.debug("Song is not OK, deleting from list");
-            }
-        }
-
-        songsLists.push(songsList);
-
-        log.trace("songsList " + JSON.stringify(songsList));
-
-        response();
-
-        return true;
+    this.success = function (songsList, source) {
+        responsePromise = responsePromise.then(function () {
+            return internalSuccess(songsList, source);
+        });
+        return responsePromise;
     };
+
+    function internalSuccess(songsList, source) {
+        return new Promise(async function(resolve, reject) {
+            log.debug("Source " + source.name + " responded success");
+            if(processingDone) {
+                resolve(false);
+                return;
+            }
+            successfulResponses++;
+
+            sourceResponseTransformer.transformList(title, songsList);
+
+            let maxSimilaritySongsIndices = songsListAnalyzer.getMaxSimilaritySongsIndices(songsList);
+            log.trace(`There is ${maxSimilaritySongsIndices.length} of songs with max similarity`);
+
+            for (const index of maxSimilaritySongsIndices) {
+                if(await songProcessor.processSong(songsList[maxSimilaritySongsIndices[index]])) {
+                    log.debug("Song is OK, processing done");
+                    processingDone = true;
+                    break;
+                } else {
+                    songsList.splice(maxSimilaritySongsIndices[index], 1);
+                    log.debug("Song is not OK, deleting from list");
+                }
+            }
+
+            songsLists.push(songsList);
+
+            log.trace("Song list after processing songs with max similarity: " + log.pjson(songsList));
+
+
+            response();
+
+            log.debug("Source " + source.name + " has just done work");
+
+            resolve(true)
+        });
+    }
 
     function isLastSourceResponse() {
         return sourceManager.getNumberOfSources() === responsesCount;

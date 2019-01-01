@@ -12,15 +12,12 @@ function Downloader() {
 
     this.processSong = async function (song) {
         log.trace("Start of processing song " + JSON.stringify(song));
-        song.source.getDownloadUrlForSong(song).then(
-            function(url) {
-                log.trace("Url obtained - " + url);
-                let downloadResult = downloadFile(url);
-                log.debug("downloadResult " + downloadResult);
+        let url = await song.source.getDownloadUrlForSong(song);
+        log.trace("Url obtained - " + url);
+        let downloadResult = downloadFile(url);
+        log.debug("downloadResult " + downloadResult);
 
-                return downloadResult;
-            }
-        ).catch(() => false);
+        return downloadResult;
     };
 
 

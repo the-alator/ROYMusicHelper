@@ -7,13 +7,13 @@ function SourceResponseTransformer() {
 
     this.transformList = function(title, songsList) {
         log.debug("Start of transforming");
-        log.trace("songsList: " + JSON.stringify(songsList));
+        log.trace("songsList: " + log.pjson(songsList));
 
         this.cleanAllSongs(songsList);
         this.compareAllSongsToTitle(title, songsList);
 
         log.debug("transforming has ended");
-        log.trace("filtered and sorted songs: " + JSON.stringify(songsList));
+        log.trace("filtered and sorted songs: " + log.pjson(songsList));
     };
 
     this.processTransformedSongsLists = function(songsLists) {

@@ -20,7 +20,7 @@ function ZkFmSource() {
 
             songs.push({
                 source: zkFmSource,
-                pageUrl: zkFmSource.baseSongPageUrl + $(this).find(".song-download.btn4.download").attr("data-url"),
+                pageUrl: $(this).find(".song-download.btn4.download").attr("data-url"),
                 title: title
             });
         });
