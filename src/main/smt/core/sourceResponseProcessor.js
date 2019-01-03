@@ -84,7 +84,7 @@ function SourceResponseProcessor(title, sourceResponseTransformer, sourceManager
                 return;
             }
 
-            log.trace("all sorted songs: " + JSON.stringify(sortedSongsList));
+            log.trace("all sorted songs: " +  log.pjson(sortedSongsList));
 
             let listForDownloading = songsListAnalyzer.getSublistWithSimilarityMoreThen(MIN_SIMILARITY, sortedSongsList);
 
