@@ -1,23 +1,5 @@
-let log;
 
-try {
-    log = new Log4js.getLogger("l1");
-    log.setLevel(Log4js.Level.ALL);
-    let appender = new Log4js.BrowserConsoleAppender(true);
-    appender.setLayout(new Log4js.SimpleLayout());
-    log.addAppender(appender);
-} catch(e) {
-    log = {};
-    log.all = function () {};
-    log.debug = function () {};
-    log.info = function () {};
-    log.warn = function () {};
-    log.error = function () {};
-    log.fatal = function () {};
-    log.trace = function () {};
-}
-
-function pjson(songList) {
+function realPjson(songList) {
     let result = "\n";
     result += "[\n";
     songList.forEach(function (song) {
@@ -28,5 +10,29 @@ function pjson(songList) {
     return result;
 }
 
+function stubPjson(songList) {
+    return "[songList]";
+}
+
+let log;
+
+try {
+    log = new Log4js.getLogger("l1");
+    log.setLevel(Log4js.Level.ALL);
+    let appender = new Log4js.BrowserConsoleAppender(true);
+    appender.setLayout(new Log4js.SimpleLayout());
+    log.addAppender(appender);
+    log.pjson = realPjson;
+} catch(e) {
+    log = {};
+    log.all = function () {};
+    log.debug = function () {};
+    log.info = function () {};
+    log.warn = function () {};
+    log.error = function () {};
+    log.fatal = function () {};
+    log.trace = function () {};
+    log.pjson = stubPjson;
+}
+
 module.exports = log;
-module.exports.pjson = pjson;
