@@ -10,7 +10,7 @@ const Downloader = require("../../smt/core/songProcessor/downloader");
 
 const SongProcessor = require("../../smt/core/songProcessor/downloader");
 const SourceResponseTransformer = require("../../smt/core/sourceResponseTransformer");
-const SourceResponseErrorHandler = require("../../smt/core/SourceResponseErrorHandler");
+const SourceResponseErrorHandler = require("../../smt/core/sourceResponseErrorHandler");
 const Controller = require("../../smt/core/controller/asyncController");
 
 const downloadIframeSrc = "http://zk.fm/?UNIQUEROYMUSICHELPER=E";
