@@ -96,14 +96,6 @@ describe("SourceResponseAccumulator spec", function () {
         assert.isTrue(songProcessor.processSongsList.calledOnceWithExactly(songsWithSimilarityMoreThen));
     });
 
-    it("should", function () {
-
-    });
-
-    it("should", function () {
-
-    });
-
     it("should throw Error if called more times then sources exists", function () {
         let source = {name : "NAME"};
         for(let i = 0; i < SOURCES_NUMBER; i++) {
