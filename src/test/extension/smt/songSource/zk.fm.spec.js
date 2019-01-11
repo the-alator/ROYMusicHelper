@@ -1,4 +1,4 @@
-const ZkFm = require("../../../../main/extension/smt/songSource/zk.fm");
+const ZkFm = require("../../../../main/smt/songSource/zk.fm");
 const assert = require("chai").assert;
 const sinon = require("sinon");
 const describe = require("mocha").describe;

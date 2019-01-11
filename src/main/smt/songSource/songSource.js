@@ -1,4 +1,6 @@
-const log = require("../../additional/logger");
+const log = require("../../extension/additional/logger");
+
+const ajax = require("../../extension/ajax/ajaxController").ajax;
 
 function SongSource() {
     let songSource = this;
@@ -9,7 +11,7 @@ function SongSource() {
     this.getSongListByTitle = function(title, responseManager){
         log.debug(`Source ${songSource.name} became fetching the list of songs`);
         let searchPageUrl = songSource.getSearchPageUrl(title);
-        $.get(searchPageUrl)
+        ajax({url: searchPageUrl})
             .done(function (data) {
                 let songs = songSource.getSongsList(data);
                 log.debug(`Source ${songSource.name} found ${songs.length} songs`);

@@ -1,4 +1,4 @@
-const SefonMeSource = require("../../../../main/extension/smt/songSource/sefon.me");
+const SefonMeSource = require("../../../../main/smt/songSource/sefon.me");
 const assert = require("chai").assert;
 const sinon = require("sinon");
 const describe = require("mocha").describe;

@@ -1,4 +1,4 @@
-const DrivemusicMe = require("../../../../main/extension/smt/songSource/drivemusic.me");
+const DrivemusicMe = require("../../../../main/smt/songSource/drivemusic.me");
 const assert = require("chai").assert;
 const sinon = require("sinon");
 const describe = require("mocha").describe;

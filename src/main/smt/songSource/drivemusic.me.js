@@ -1,5 +1,6 @@
-const log = require("../../additional/logger");
+const log = require("../../extension/additional/logger");
 const SongSource = require("./songSource");
+const ajax = require("../../extension/ajax/ajaxController").ajax;
 
 function DrivemusicMeSource() {
     SongSource.call(this);
@@ -13,7 +14,7 @@ function DrivemusicMeSource() {
     this.getSongListByTitle = function (title, responseManager) {
         log.debug(`Source ${drivemusicMeSource.name} became fetching the list of songs`);
         let searchPageUrl = drivemusicMeSource.getSearchPageUrl();
-        $.ajax({
+        ajax({
             url: searchPageUrl,
             data: {
                 'do': 'search',
