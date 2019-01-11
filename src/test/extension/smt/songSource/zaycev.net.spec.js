@@ -1,4 +1,4 @@
-const ZaycevNet = require("../../../../main/extension/smt/songSource/zaycev.net");
+const ZaycevNet = require("../../../../main/smt/songSource/zaycev.net");
 const assert = require("chai").assert;
 const sinon = require("sinon");
 const describe = require("mocha").describe;

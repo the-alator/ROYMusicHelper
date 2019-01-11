@@ -1,4 +1,4 @@
-const Mp3partyNet = require("../../../../main/extension/smt/songSource/mp3party.net");
+const Mp3partyNet = require("../../../../main/smt/songSource/mp3party.net");
 const assert = require("chai").assert;
 const sinon = require("sinon");
 const describe = require("mocha").describe;
