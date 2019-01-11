@@ -13,8 +13,8 @@ function SourceResponseProcessor(title, sourceResponseTransformer, sourceManager
     let responsePromise = Promise.resolve();
 
     this.fail = function (source) {
-        response();
         failResponses++;
+        response();
         log.debug("Source " + source.name + " responded fail");
     };
 
@@ -29,10 +29,8 @@ function SourceResponseProcessor(title, sourceResponseTransformer, sourceManager
         return new Promise(async function(resolve, reject) {
             log.debug("Source " + source.name + " responded success");
             if(processingDone) {
-                resolve(false);
-                return;
+                return resolve(false);
             }
-            successfulResponses++;
 
             sourceResponseTransformer.transformList(title, songsList);
 
@@ -40,20 +38,24 @@ function SourceResponseProcessor(title, sourceResponseTransformer, sourceManager
             log.trace(`There is ${maxSimilaritySongsIndices.length} of songs with max similarity`);
 
             for (const index of maxSimilaritySongsIndices) {
-                if(await songProcessor.processSong(songsList[maxSimilaritySongsIndices[index]])) {
+                if(await songProcessor.processSong(songsList[index])) {
                     log.debug("Song is OK, processing done");
                     processingDone = true;
                     break;
                 } else {
-                    songsList.splice(maxSimilaritySongsIndices[index], 1);
+                    songsList.splice(index, 1);
                     log.debug("Song is not OK, deleting from list");
                 }
             }
 
-            songsLists.push(songsList);
+            if(songsList.length !== 0) {
+                successfulResponses++;
+                songsLists.push(songsList);
+            } else {
+                failResponses++;
+            }
 
             log.trace("Song list after processing songs with max similarity: " + log.pjson(songsList));
-
 
             response();
 
@@ -74,6 +76,7 @@ function SourceResponseProcessor(title, sourceResponseTransformer, sourceManager
         responsesCount++;
 
         if(!processingDone && isLastSourceResponse()) {
+            processingDone = true;
             if(successfulResponses === 0) {
                 sourceResponseErrorHandler.processError();
                 return;
@@ -84,7 +87,7 @@ function SourceResponseProcessor(title, sourceResponseTransformer, sourceManager
                 return;
             }
 
-            log.trace("all sorted songs: " + JSON.stringify(sortedSongsList));
+            log.trace("all sorted songs: " + log.pjson(sortedSongsList));
 
             let listForDownloading = songsListAnalyzer.getSublistWithSimilarityMoreThen(MIN_SIMILARITY, sortedSongsList);
 
