@@ -21,8 +21,6 @@ function DrivemusicMeSource() {
                 'subaction': 'search',
                 'story': title
             },
-            method: 'GET',
-            dataType: "text"
         }).done(function (data) {
             let songs = drivemusicMeSource.getSongsList(data);
             log.debug(`Source ${drivemusicMeSource.name} found ${songs.length} songs`);
@@ -55,7 +53,7 @@ function DrivemusicMeSource() {
 
 
     this.getDownloadUrl = function(data) {
-        return $(data).find(".song-author-btn .btn-download").attr("href");
+        return $(data).find(".song-author-btn.btn-download").attr("href");
     };
 
 }

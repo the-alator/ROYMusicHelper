@@ -48,5 +48,5 @@
       "css": ["/src/main/extension/injects/youtube.com.css"]
     }
   ],
-  "web_accessible_resources": ["resources/images/general/*", "out/sourcesSpec.html"]
+  "web_accessible_resources": ["resources/images/general/*", "src/test/sourcesSpec.html"]
 }

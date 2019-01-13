@@ -33,7 +33,7 @@ function SongSource() {
 
         return new Promise(function(resolve, reject) {
             let songPageUrl = songSource.getSongPageUrl(song);
-            $.get(songPageUrl)
+            ajax({url : songPageUrl})
                 .done(function (data) {
                     let downloadUrl = songSource.getDownloadUrl(data);
                     if(!downloadUrl) {

@@ -30,7 +30,7 @@ describe("ZkFmSource spec", function () {
 
     it('should make ajax and return download url via promise', function () {
         const song = {pageUrl : "/download/9408228"};
-        const downloadUrlExpected = "http://zk.fm/download/9408228";
+        const downloadUrlExpected = "http://z1.fm/download/9408228";
 
         return zkFmSource.getDownloadUrlForSong(song).then( function (downloadUrl) {
             assert.equal(downloadUrlExpected, downloadUrl);
