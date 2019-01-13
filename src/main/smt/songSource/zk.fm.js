@@ -7,8 +7,8 @@ function ZkFmSource() {
     const zkFmSource = this;
 
     this.name = "zk.fm";
-    this.baseSearchUrl = "http://zk.fm/mp3/search?keywords=";
-    this.baseSongPageUrl = "http://zk.fm";
+    this.baseSearchUrl = "http://z1.fm/mp3/search?keywords=";
+    this.baseSongPageUrl = "http://z1.fm";
 
     this.getSongsList = function (data) {
         let songs = [];
