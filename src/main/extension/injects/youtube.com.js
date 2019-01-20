@@ -47,34 +47,7 @@ function wrapTitleToFlexDiv(containerDiv) {
     flexDiv.appendChild(titleH1);
     let button = document.createElement("div");
     button.innerHTML = `<div id='ROYMusicHelperDownloadButton' class='extension.popup-btn flex-reset'>
-        <img alt='download' src='${chrome.runtime.getURL("resources/images/general/download.png")}'>
+        <img alt='download' src='${chrome.runtime.getURL("resources/extension/images/download.png")}'>
      </div>`;
     flexDiv.appendChild(button.firstChild);
-}
-
-function init() {
-    console.log(JSON.stringify(document));
-
-    console.log("#top-level-buttons: ");
-    $("#top-level-buttons").each(function () {
-        console.log($(this));
-    });
-
-    $("#top-level-buttons").append(
-        "<div  class='ROYMusicHelperDownloadButton extension.popup-btn flex-reset'>" +
-        "<img alt='download' src='" + chrome.runtime.getURL("resources/images/general/download.png") + "'>" +
-        "</div>" +
-        ""
-    );
-
-    $(".ROYMusicHelperDownloadButton").click(function (event) {
-        event.stopImmediatePropagation();
-
-        let detailsDOM = $(event.currentTarget).parent().children(".details");
-        let title = $(detailsDOM).find(".title .ellip").text();
-        let author = $(detailsDOM).find(".artist .ellip").text();
-
-        let text = title + " " + author;
-        chrome.runtime.sendMessage({action: "getSongListByTitle", value: text});
-    });
 }

@@ -1,13 +1,7 @@
-window.addEventListener('popstate', function () {
-    console.log("HREF CHANGED");
-});
 $(function () {
-    console.log("READY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    console.log(window.location.href);
-    console.log(document);
+    console.log("Content script loaded");
 
     $(".main").on("DOMSubtreeModified", function(event){
-        // $(".main").off("DOMSubtreeModified");
         if(event.target !== event.currentTarget){
             return;
         }
@@ -16,7 +10,7 @@ $(function () {
     });
 });
 
-let downloadButtonHTML = "<div  class=\"ROYMusicHelperDownloadButton extension.popup-btn flex-reset\"><img alt='download' src='" + chrome.runtime.getURL("resources/images/extension.popup/download.png") + "'></div>";
+let downloadButtonHTML = "<div  class=\"ROYMusicHelperDownloadButton extension.popup-btn flex-reset\"><img alt='download' src='" + chrome.runtime.getURL("resources/extension/images/download.png") + "'></div>";
 
 function setButtons(event){
     if(event.target !== event.currentTarget){

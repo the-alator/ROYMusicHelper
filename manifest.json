@@ -7,10 +7,10 @@
     "<all_urls>", "downloads", "tabs"
   ],
 
-  "icons": { "48": "/resources/images/general/music-48.png" },
+  "icons": { "48": "/resources/extension/images/music-48.png" },
   "browser_action": {
     "default_icon": {
-      "48": "/resources/images/general/music-48.png"
+      "48": "/resources/extension/images/music-48.png"
     },
     "default_title": "ROYMusicHelper",
     "default_popup": "src/main/extension/popup/popup.html"
@@ -48,5 +48,5 @@
       "css": ["/src/main/extension/injects/youtube.com.css"]
     }
   ],
-  "web_accessible_resources": ["resources/images/general/*", "src/test/sourcesSpec.html"]
+  "web_accessible_resources": ["resources/extension/*", "src/test/sourcesSpec.html"]
 }
