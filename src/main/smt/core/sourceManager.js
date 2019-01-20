@@ -1,6 +1,9 @@
 const log = require("../../extension/additional/logger");
 
-const Mp3partyNetSource = require("../../extension/smt/songSource/mp3party.net");
+const Mp3partyNetSource = require("../songSource/mp3party.net");
+const ZaycevNetSource = require("../songSource/zaycev.net");
+const ZkFmSource = require("../songSource/zk.fm");
+const DrivemusicMeSource = require("../songSource/drivemusic.me");
 
 function SourceManager() {
     let supportedSources = [];
@@ -19,6 +22,9 @@ function SourceManager() {
     };
 
     this.registerSource(new Mp3partyNetSource());
+    this.registerSource(new ZaycevNetSource());
+    this.registerSource(new ZkFmSource());
+    this.registerSource(new DrivemusicMeSource());
 }
 
 module.exports = SourceManager;
