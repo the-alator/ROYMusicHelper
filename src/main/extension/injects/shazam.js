@@ -10,7 +10,7 @@ $(function () {
     });
 });
 
-let downloadButtonHTML = "<div  class=\"ROYMusicHelperDownloadButton extension.popup-btn flex-reset\"><img alt='download' src='" + chrome.runtime.getURL("resources/images/general/download.png") + "'></div>";
+let downloadButtonHTML = "<div  class=\"ROYMusicHelperDownloadButton extension.popup-btn flex-reset\"><img alt='download' src='" + chrome.runtime.getURL("resources/extension/images/download.png") + "'></div>";
 
 function setButtons(event){
     if(event.target !== event.currentTarget){
